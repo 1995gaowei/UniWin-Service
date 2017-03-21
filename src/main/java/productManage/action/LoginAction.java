@@ -2,10 +2,7 @@ package productManage.action;
 
 import java.io.IOException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
-import productManage.model.User;
 import productManage.model.wy.Authority;
 import productManage.service.system.AuthorityService;
 import productManage.service.system.UserService;
@@ -58,5 +55,4 @@ public class LoginAction extends BaseAction{
 		else
 			return false;
 	}
-	
 }

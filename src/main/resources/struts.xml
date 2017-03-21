@@ -690,14 +690,13 @@
 			</result>
 			<result name="failed">/index.jsp</result>
 		</action>
-<!--第二次修改001------------------------------------------------------------------------------------------>
+
 				<action name="materialApplyDetail" class="MaterialAction" method="materialApplyDetail">
 		      <result name="success">/pages/material/material_apply.jsp</result>
         	<result name="failed">/index.jsp</result>
 		</action>
-<!--第二次修改001----------------------------------------------------------------------------------------------->
+
 	</package>
-	
 	<package name="vendor" namespace="/Vendor" extends="struts-default,json-default">
 		<action name="showVendorList" class="VendorAction" method="showVendorList">
 			<result name="success">/pages/vendor/vendor_manage.jsp</result>

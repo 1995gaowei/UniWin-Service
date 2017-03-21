@@ -234,7 +234,7 @@ td {
 						"materialCodeAjax":material
 					};
 
-					jQuery.post("http://localhost:8080/ZZL/Material/showMaterialDetail",params,function(data){
+					jQuery.post("http://localhost:8080/UniWin/Material/showMaterialDetail",params,function(data){
 						obj = eval("("+data+")");
 						$("#materialName").val(obj.materialName);
 						$("#materialCode").val(obj.materialCode);
