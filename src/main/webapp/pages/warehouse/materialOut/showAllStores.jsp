@@ -137,12 +137,18 @@
 							<div class="col-md-2">
 								<input name="outVol" type="text" class="form-control">
 							</div>
-							<label class="col-md-7 control-label" style="color: red"
-								id="outInfo"></label>
-						</div>
-						<div class="form-group">
+	<!-- ----------第二次修改--001----------------------------------------------- -->
+							<label class="col-md-2 control-label">出库时间：</label>
+							<div class="col-md-2">
+								<input name="outDate" type="text" class="form-control">			 
+							</div>
+	<!-------------第二次修改--001------------------------------------------------------>
+	<!-----第二次修改  	<label class="col-md-7 control-label" style="color: red"     -->
+	<!-----第二次修改 								id="outInfo"></label>            -->
+	<!-----第二次修改					</div>                                       -->
+	<!-----第二次修改					<div class="form-group">                     -->
 							<label class="col-md-2 control-label">备注：</label>
-							<div class="col-md-9">
+							<div class="col-md-2">
 								<input name="comment" type="text" class="form-control">
 							</div>
 						</div>

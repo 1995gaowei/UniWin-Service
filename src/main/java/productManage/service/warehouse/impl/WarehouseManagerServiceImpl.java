@@ -90,13 +90,19 @@ public class WarehouseManagerServiceImpl implements WarehouseManagerService {
     @Override
     public PageBean getMaterialInputList(Calendar calendar,int page,int rowsPerPage) {
 		if(calendar == null){
-			String hql = "select date_format(m.materialInputDate,'%Y-%m-%d') as materialInputDate,sum(m.materialInputVol) as total from MaterialInput as m group by materialInputDate";
+//第二次修改处//String hql = "select date_format(m.materialInputDate,'%Y-%m-%d') as materialInputDate,sum(m.materialInputVol)  as total from MaterialInput as m group by materialInputDate";
+			//第二次修改处001///////////////////////
+			String hql = "select date_format(m.materialInputDate,'%Y-%m-%d') as materialInputDate,sum(m.materialInputVol)  as total,m.user.userName from MaterialInput as m group by materialInputDate,user.userId";
+			//第二次修改处001///////////////////////
 			PageBean result = pageService.queryForPage(hql, rowsPerPage, page);
 			return result;
 		}else{
 			SimpleDateFormat sdp = new SimpleDateFormat("yyyy-MM-dd");
 			String date = sdp.format(calendar.getTimeInMillis());
-			String hql = "select date_format(m.materialInputDate,'%Y-%m-%d') as materialInputDate,sum(m.materialInputVol) as total from MaterialInput as m group by materialInputDate having materialInputDate = '"+date+"'";
+//第二次修改处//String hql = "select date_format(m.materialInputDate,'%Y-%m-%d') as materialInputDate,sum(m.materialInputVol) as total from MaterialInput as m group by materialInputDate having materialInputDate = '"+date+"'";
+			//第二次修改处002///////////////////////
+			String hql = "select date_format(m.materialInputDate,'%Y-%m-%d') as materialInputDate,sum(m.materialInputVol) as total,m.user.userName from MaterialInput as m group by materialInputDate,user.userId having materialInputDate = '"+date+"'";
+			//第二次修改处002///////////////////////
 			System.out.println(hql);
 			PageBean result = pageService.queryForPage(hql, rowsPerPage, page);
 			System.out.println(result.getList());
@@ -173,14 +179,21 @@ public class WarehouseManagerServiceImpl implements WarehouseManagerService {
 	public PageBean getMaterialOutputList(Calendar calendar, int page,
 			int rowsPerPage) {
 		if (calendar == null) {
-			String hql = "select date_format(m.materialOutputDate,'%Y-%m-%d') as materialOutputDate,sum(m.materialOutputVol) as total from MaterialOutput as m group by materialOutputDate";
+//第二次修改	String hql = "select date_format(m.materialOutputDate,'%Y-%m-%d') as materialOutputDate,sum(m.materialOutputVol) as total from MaterialOutput as m group by materialOutputDate";
+			/////////////////////第二次修改003/////////////////////////////////////////
+			String hql = "select date_format(m.materialOutputDate,'%Y-%m-%d') as materialOutputDate,sum(m.materialOutputVol) as total ,m.user.userId from MaterialOutput as m group by materialOutputDate,user.userId";
+			//////////////////////第二次修改003//////////////////////////////////////
 			PageBean result = pageService.queryForPage(hql, rowsPerPage, page);
 			return result;
 		} else {
 			SimpleDateFormat sdp = new SimpleDateFormat("yyyy-MM-dd");
 			String date = sdp.format(calendar.getTimeInMillis());
-			String hql = "select date_format(m.materialOutputDate,'%Y-%m-%d') as materialOutputDate,sum(m.materialOutputVol) as total from MaterialOutput as m group by materialOutputDate having materialOutputDate = '"
+//第二次修改	String hql = "select date_format(m.materialOutputDate,'%Y-%m-%d') as materialOutputDate,sum(m.materialOutputVol) as total from MaterialOutput as m group by materialOutputDate having materialOutputDate = '"
+//第二次修改						+ date + "'";
+			///////////////////////第二次修改004////////////////////////////////
+			String hql = "select date_format(m.materialOutputDate,'%Y-%m-%d') as materialOutputDate,sum(m.materialOutputVol) as total ,m.user.userId  from MaterialOutput as m group by materialOutputDate,user.userId  having materialOutputDate = '"
 					+ date + "'";
+			////////////////////////第二次修改004////////////////////////////
 			System.out.println(hql);
 			PageBean result = pageService.queryForPage(hql, rowsPerPage, page);
 			System.out.println(result.getList());

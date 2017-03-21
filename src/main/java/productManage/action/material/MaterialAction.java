@@ -5,7 +5,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+////////////第二次修改/////////////////////
+import java.util.HashSet;
+import java.util.Set;
+////////////第二次修改////////////////////////
 import javax.servlet.ServletException;
 
 import org.json.JSONArray;
@@ -40,13 +43,13 @@ public class MaterialAction extends PageAction{
 	@Autowired
     private UserService userservice; 
 	
-	private String materialName;
+	private String materialName="";
 	
 	private String materialCode="";
 	
-	private String materialType;
+	private String materialType="";
 	
-	private String vendorName;
+	private String vendorName="";
 	
 	private String designCode="";
 
@@ -60,7 +63,7 @@ public class MaterialAction extends PageAction{
 	}
 	
 	public String addMaterial() throws ServletException, IOException{
-		Material material = new Material();
+Material material = new Material();
 		
 		//信息设置
             //material table//////////////////////////////////////////
@@ -112,8 +115,9 @@ public class MaterialAction extends PageAction{
 		materialservice.addSupply(supply);
 		//Store==============================================
 		String location = request.getParameter("warehouse");
-		float remainVol = Float.parseFloat(request.getParameter("remainVol"));
+		float remainVol = 0;
 		float frozenVol = 0;
+		remainVol = 0;
 		
 		WareHouse warehouse = materialservice.getWarehouseByLocation(location);
 		Store store = new Store(warehouse,material,remainVol,frozenVol);
@@ -125,33 +129,27 @@ public class MaterialAction extends PageAction{
 	}
 	
 	public String showMaterialList(){
-		if (request.getSession().getAttribute("account")!=null){
-			return SUCCESS;
+		String materialName = request.getParameter("materialName");
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put(MaterialConstants.SEARCH_MATERIAL_PARAMS[0], materialName);
+		try {
+			this.pageBean = materialservice.queryMaterial(this.rowsPerPage, this.page, params);
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.pageBean=new PageBean();
+			return ERROR;
 		}
-		else{
-			return "failed";
-		}
-	}
-	
-	public String showMaterialSelect(){//////////////////////////此方法为新增方法////////////////////
-		if (request.getSession().getAttribute("account")!=null){
-			return SUCCESS;
-		}
-		else{
-			return "failed";
-		}
-
+		return SUCCESS;
 	}
 	
 	 public String showMaterialListByAll(){
 	       
-	        String vname=request.getParameter("vendorName");
-	        String mtype=request.getParameter("materialType");
+	      
 			Map<String, Object> params = new HashMap<String, Object>();	
 			params.put(MaterialConstants.SEARCH_MATERIAL_PARAMS[0], this.materialName);
 			params.put(MaterialConstants.SEARCH_MATERIAL_PARAMS[1], this.materialCode);
-			params.put(MaterialConstants.SEARCH_MATERIAL_PARAMS[2], mtype);
-			params.put(MaterialConstants.SEARCH_MATERIAL_PARAMS[3], vname);
+			params.put(MaterialConstants.SEARCH_MATERIAL_PARAMS[2], materialType);
+			params.put(MaterialConstants.SEARCH_MATERIAL_PARAMS[3], vendorName);
 			
 			try {
 				this.pageBean = materialservice.queryMaterial(this.rowsPerPage,this.page,params);
@@ -466,4 +464,72 @@ public class MaterialAction extends PageAction{
 		System.out.println(result.toString());
 		return SUCCESS;
 	}
+	///////////////第二次修改001//////////////////////////////
+	String MaterialApplyDetailAjax="";
+	public void setMaterialApplyDetailAjax(String s){
+		this.MaterialApplyDetailAjax=s;
+	}
+	public String getMaterialApplyDetailAjax(){
+		return this.MaterialApplyDetailAjax;
+	}
+	public String materialApplyDetail(){
+		if (request.getSession().getAttribute("account")!=null){
+			System.out.println("enter materialApplyDetail");
+            String materialapplycode=request.getParameter("materialApplyCodeAjax");
+    	    Materialapply mo = materialservice.getMaterialApplyList(materialapplycode);
+    	
+    	    JSONObject jo = new JSONObject();	
+    	try {
+//	    	for(Materialapply mo:results){
+	    		Material materialT = mo.getMaterial();
+//	    		WareHouse warehouseT = .getWarehouse();
+	    		Set<Store> storesa=materialT.getStores();
+	    		System.out.println("begin for");
+	    		
+	    		JSONObject material = new JSONObject();
+	    		JSONArray storeall =  new JSONArray();
+	    		JSONArray warehouses = new JSONArray();
+	    		jo.put("material", material);
+	    		jo.put("storeall", storeall);	
+	    		jo.put("warehouses", warehouses);
+	    		material.put("materialName", materialT.getMaterialName());
+	    		material.put("materialCode", materialT.getMaterialCode());
+	    		for(Store storeT:storesa)    		
+	    		{
+	    			WareHouse warehouseT = storeT.getWarehouse();	    				    		
+		    		JSONObject store = new JSONObject();
+		    		JSONObject warehouse = new JSONObject();		    		
+		    		warehouse.put("location", warehouseT.getLocation());
+		    		warehouse.put("remain", warehouseT.getRemain());
+		    		store.put("remainVol", storeT==null?"":storeT.getRemainVol());
+		    		storeall.put(store);
+		    		warehouses.put(warehouse);
+	    		}
+	    		
+//	    		material.put("materialIngredient", materialT.getMaterialIngredient());
+//	    		material.put("unitPrice", materialT.getUnitPrice());
+//	    		material.put("materialType", materialT.getMaterialType());
+//	    		material.put("colorCode", materialT.getColorCode());
+//	    		material.put("colorDescription", materialT.getColorDescription());
+//	    		warehouse.put("warehouseid", warehouseT.getWarehouseid());
+
+//	    		warehouse.put("remain", warehouseT.getRemain());
+//	    		user.put("userName", userT.getUserName());
+//	    		store.put("remainVol", storeT==null?"":storeT.getRemainVol());
+
+//	    		json.put(jo);
+//	    	}
+    	} catch (JSONException e) {
+    		e.printStackTrace();
+    	}
+    	setMaterialApplyDetailAjax(jo.toString());
+    	return SUCCESS;
+		}
+		else{
+			return "failed";
+		}
+	}
+	
+	
+	/////////////第二次修改001////////////////////////////////
 }

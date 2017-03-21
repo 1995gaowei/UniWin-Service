@@ -88,9 +88,9 @@
 					                                            <th>存储位置</th>
 					                                            <th>库存数</th>
 					                                            <th>可用库存数</th>
-					                                            
-					                                            
-					                                            
+					                           <!-- ------------------第二次修改处001-------------------------- -->                 
+					                                            <th>查看</th>
+					                           <!-- ------------------第二次修改处001-------------------------- -->  					                                            
 					                                            
 					                                        </tr>       
 					                                        <form>                                
@@ -108,7 +108,9 @@
 																       <td><s:property value="#mnv.vendor.vendorName" /></td>  -->
  <!--此处需要添加超链接，且链接页面可以参照入库单管理的物料详情 storeDetailModal.jsp-->
 					 <!--此处用隐藏框传递materialCode，待验证 .已验证，不用此方法-->       
-					                                           
+					                <!-- ------------------第二次修改处002-------------------------- -->
+					                                            <td onclick="fillDetailInfo('${mnv.material.materialCode}','${mnv.warehouse.warehouseid}')"><font color="#0080FF">详情</font></td>
+					                <!-- ------------------第二次修改处002-------------------------- -->
 					                                        </tr>
 					                                        
 					                                        </s:iterator>
@@ -218,6 +220,10 @@
 		</div>
 		<!-- /.modal -->
 	</div>
+	<!-- 第二次修改004--------------------------------------------------------- -->
+	<%@include file="../warehouse/public/storeDetailModal.jsp" %>
+     <!-- 第二次修改004--------------------------------------------------------- -->
+	
     	</s:if>
 		<s:else>
 			<jsp:include page="../../../login.jsp"></jsp:include>
@@ -225,8 +231,8 @@
 		
     <script type="text/javascript">
     	window.onload = changeTab("10100","10101");
-    	$(".click").click(function(){    	
-    		var trlist=document.getElementsByTagName("tr");   		
+  /*  	$(".click").click(function(){    	
+  		var trlist=document.getElementsByTagName("tr");   		
     		for(i=0;i<trlist.length;i++){
     			trlist[i].bgColor="white";
     		}
@@ -241,7 +247,7 @@
     				"materialCodeAjax":materialCodeAjax,
     				"vendorNameAjax":vendorNameAjax
     			};
-			jQuery.post("http://localhost:8888/UniWin/Warehouse/materialDetail",params,function(data){ 
+			jQuery.post("http://localhost:8080/UniWin/Warehouse/materialDetail",params,function(data){ 
 
 				var obj=eval("("+data+")");
 				$("#materialName").val(obj[0].material.materialName);
@@ -272,7 +278,7 @@
     			"materialCodeAjax":materialCodeAjax,
 				"locationAjax":locationAjax				
     			};
-			jQuery.post("http://localhost:8888/UniWin/Warehouse/locationAjax",params,function(data){ 
+			jQuery.post("http://localhost:8080/UniWin/Warehouse/locationAjax",params,function(data){ 
 				var obj=eval("("+data+")");
 				$("#remainVol").val(obj[0].remainVol);
 				$("#remain").val(obj[0].remain);
@@ -299,7 +305,7 @@
                     }
                     
                 })
-            }
+            }*/
             function showAddMaterialSelect(){
                 
                 location.href= getRootPath() + "/Material/showApplySelect";
@@ -312,7 +318,7 @@
                 var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
                 return(localhostPath + projectName);
             }
-    	function showMaterial(){
+ /*   	function showMaterial(){
         		//var selectedID = $(".checked + input[name='selectedID']").val();
         		var material = $(".checked + input[name='material']").val();
         		if(material != null ){	
@@ -320,7 +326,7 @@
 						"materialCodeAjax":material
 					};
 
-					jQuery.post("http://localhost:8888/UniWin/Material/showMaterialDetail",params,function(data){
+					jQuery.post("http://localhost:8080/UniWin/Material/showMaterialDetail",params,function(data){
 						obj = eval("("+data+")");
 						$("#materialName").val(obj.materialName);
 						$("#materialCode").val(obj.materialCode);
@@ -339,7 +345,39 @@
         		}else{
         			alert("请选择");
         		}
-        	}
+        	}*/
+        	///////////////第二次修改/003///////////////////////////////////////
+        	function fillDetailInfo(material,warehouse){
+		params = {
+				"materialCode":material,
+				"warehouseid":warehouse
+		};
+		
+		jQuery.post("/UniWin/Warehouse/warehousePublicAjax_getStoreDetailInfoAjax",params,function(data){
+			obj = eval("("+data+")");
+			$("#materialName").html(obj.material.materialName);
+			$("#materialCode").html(obj.material.materialCode);
+			$("#materialType").html(obj.material.materialType);
+			$("#unitPrice").html(obj.material.unitPrice);
+			$("#colorCode").html(obj.material.colorCode);
+			$("#colorDescription").html(obj.material.colorDescription);
+			$("#materialIngredient").html(obj.material.materialIngredient);
+			$("#remain").html(obj.warehouse.remain);
+			$("#remainVol").html(obj.store.remainVol);
+			$("#unit").html(obj.material.unit);
+			$("#location").html(obj.warehouse.location);
+			vendors = obj.vendors;
+			content = "";
+			for(i =0;i<vendors.length;i++){
+				content += ("<tr><td>"+vendors[i].vendorId+"</td><td>"+vendors[i].vendorName+"</td><td>"+vendors[i].vendorMobileNum+"</td><td>"+vendors[i].vendorAddr+"</td></tr>");
+			}
+			$("#vendors").html(content);
+			
+		},"json");
+		$('#detailModel').modal('show');
+	}
+      	
+        	//////////////第二次修改/003/////////////////////////////////////////////
     	
     </script>
 </body>

@@ -63,14 +63,22 @@
 					        			<thead>
 					        				<tr>
 					        					<th>出库时间</th>
+					 <!-- -第二次修改处-001-------------------------------------- -->
+					                            <th>负责人</th>
+					 <!-- -第二次修改处-001-------------------------------------- -->
 					        					<th>出库总数</th>
+				
 					        				</tr>
 					        			</thead>
 					        			<tbody id = "outputList">
 					        				<s:iterator value="pageBean.list" id="m">
 						        				<tr style="cursor:pointer">
-						        					<td><s:property value="#m[0]"/></td>
-						        					<td><s:property value="#m[1]"/></td>
+					 <!--  第二次修改处     			<td><s:property value="#m[0]"/></td>       -->  
+					 <!--  第二次修改处     			<td><s:property value="#m[1]"/></td>       --> 
+					                                <td><s:property value="#m[0]"/></td>
+					                                <td><s:property value="#m[2]"/></td>
+					                                <td><s:property value="#m[1]"/></td>
+					                               
 						        				</tr>
 					        				</s:iterator>
 					        			</tbody>

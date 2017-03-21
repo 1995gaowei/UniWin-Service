@@ -24,7 +24,10 @@ import productManage.vo.material.ApplyConstants;
 import productManage.vo.material.MaterialConstants;
 import productManage.vo.process.ProcessConstants;
 import productManage.vo.technique.TechniqueConstants;
+///////////第二次修改001////////////////////
+import productManage.dao.lhj.MaterialapplyDao;
 
+///////////第二次修改001///////////////////
 @Service
 public class MaterialServiceImpl implements MaterialService{
 
@@ -38,6 +41,10 @@ public class MaterialServiceImpl implements MaterialService{
 	private PageService pageservice;
 	@Autowired
 	private SupplyDao supplydao;
+///////////第二次修改001////////////////////
+	@Autowired
+	private MaterialapplyDao materialapplydao;	
+///////////第二次修改001////////////////////
 	
 	@Override
 	public void addMaterial(Material material) {
@@ -61,7 +68,11 @@ public class MaterialServiceImpl implements MaterialService{
 	@Override
 	public PageBean queryMaterial(int pageSize, int page, Map<String, Object> params) {
 		// TODO Auto-generated method stub
-		String hql="select distinct(supply) from Material as material ,Store as store, Supply as supply,Vendor as vendor ";
+//第二次修改String hql="select distinct(supply) from Material as material ,Store as store, Supply as supply,Vendor as vendor ";
+		//////////第二次修改001//////////////////////////////////////
+		String hql="select material.materialCode,material.materialName,material.materialType,vendor.vendorName,store.remainVol ,store.warehouse.location,material.colorDescription,material.materialIngredient,store.warehouse.warehouseid from Material as material,Store as store, Supply as supply,Vendor as vendor ";
+	
+		//////////第二次修改001/////////////////////////////////////
 		String materialName = (String)params.get(MaterialConstants.SEARCH_MATERIAL_PARAMS[0]);
 		String materialCode = (String)params.get(MaterialConstants.SEARCH_MATERIAL_PARAMS[1]);
 		String materialType = (String)params.get(MaterialConstants.SEARCH_MATERIAL_PARAMS[2]);
@@ -70,49 +81,29 @@ public class MaterialServiceImpl implements MaterialService{
             hql +=" material.materialCode=store.material.materialCode and material.materialCode=supply.material.materialCode and vendor.vendorId=supply.vendor.vendorId ";
 		//System.out.println(materialCode);
 		if(materialName!=null&&!(materialName.equals(""))){
-			
 			hql += "and ";
-			
-			
 			hql += " material.materialName like '%" + materialName + "%' ";
-		
 			System.out.println(1);
-			
-		    
 		}
         if(materialCode!=null&&!(materialCode.equals(""))){     
-        	
-				hql += "and  ";
-        	
-			
+			hql += "and  ";
 			hql += " material.materialCode like '%" + materialCode + "%' ";
 			//hql += " and supply.material.materialCode like '%" + materialCode + "%' ";
 			//hql += " and store.material.materialCode like '%" + materialCode + "%' ";
-			
 			System.out.println(2);
-		
         }
          if(materialType!=null&&!(materialType.equals(""))){ 
-        
-				hql += "and ";
-			
+			hql += "and ";
 			hql += " material.materialType like '%" + materialType + "%' ";
-		
 			System.out.println(3);
-        }
-              
+        } 
        if(vendorName!=null&&!(vendorName.equals(""))){ 
-        	
-				hql += "and ";
-			              
+			hql += "and ";         
 			hql += " vendor.vendorName like '%" + vendorName + "%' ";
-			
-		
 			System.out.println(4);
         }
         System.out.println(hql);
-    
-        				                     
+        
 		PageBean pageBean = pageservice.queryForPage(hql,pageSize,page);
 		List<Material> materialList = pageBean.getList();
 		pageBean.setList(materialList);
@@ -328,6 +319,15 @@ public class MaterialServiceImpl implements MaterialService{
 		// TODO Auto-generated method stub
 		basedao.save(materialapply);
 	}
+	
+	////////////////第二次修改////////////////////////////////////
+	@Override
+	public Materialapply getMaterialApplyList(String materialapplycode){
+		
+		return materialapplydao.getMaterialApplyByCode(materialapplycode);
+	}
+	////////////////第二次修改////////////////////////////////////
+
 
 	
 

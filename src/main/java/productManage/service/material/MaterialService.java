@@ -42,6 +42,8 @@ public interface MaterialService {
     public List<Material> getMaterialListByAll(Map<String, Object> params);
     public PageBean queryMaterialVendorByCode(int pageSize, int page,Map<String, Object> params);
     public void addMaterialApply(Materialapply materialapply );
-    
+    ////////////////////第二次修改/////////////////////////////////////
+    public Materialapply getMaterialApplyList(String materialmapplycode);
+    ////////////////////第二次修改/////////////////////////////////////
     
 }

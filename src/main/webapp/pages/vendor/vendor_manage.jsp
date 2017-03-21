@@ -80,8 +80,8 @@ td {
 									style="margin: 5px 5px 5px 75px" data-toggle="modal" data-target="#addVendor">新增</button>
 							</div>
 							<div class="row">
-								<button type="submit" class="btn btn-warning"
-									style="margin: 5px 5px 5px 75px" onclick="showUpdateVendor()">修改</button>
+	<!-- 第二次修改--- 			<button type="submit" class="btn btn-warning"   -->				
+	<!-- 第二次修改--- 				style="margin: 5px 5px 5px 75px" onclick="showUpdateVendor()">修改</button>-->
 							</div>							
 						</div>
 
@@ -101,9 +101,13 @@ td {
 								</tr>
 								<s:iterator value="PageBean.list" var="vendorItem">
 									<tr>
-										<td><input type="radio" name="select"><input type="hidden" name="selectedID" value=${vendorItem.vendorId}></td>
-										<td><s:property value="#vendorItem.vendorName" /></td>
-										<td><s:property value="#vendorItem.vendorId" /></td>
+					<!--  第二次修改处	<td><input type="radio" name="select"><input type="hidden" name="selectedID" value=${vendorItem.vendorId}></td>  -->
+					<!--  第二次修改处	<td ><s:property value="#vendorItem.vendorName" /></td>  -->
+					<!-------------------第二次修改处001------------------------------>		
+					                    <td></td>
+					                    <td onclick="showUpdateVendor('${vendorItem.vendorId}')"><font color="##0080FF"><s:property value="#vendorItem.vendorName" /></font></td>
+					<!-------------------第二次修改处001------------------------------>								
+					                    <td><s:property value="#vendorItem.vendorId" /></td>
 										<td><s:property value="#vendorItem.vendorPhoneNum" /></td>
 										<td><s:property value="#vendorItem.vendorMobileNum" /></td>
 										<td><s:property value="#vendorItem.vendorAddr" /></td>
@@ -313,9 +317,9 @@ td {
     <script type="text/javascript">
     	window.onload = changeTab("10000","10006");
        	
-        	function showUpdateVendor(){
-        		var selectedID = $(".checked + input[name='selectedID']").val();
-        		if(selectedID != null){
+        	function showUpdateVendor(selectedID){ //第二次修改处，增加了函数参数
+ //第二次修改处	var selectedID = $(".checked + input[name='selectedID']").val();
+  //第二次修改处  if(selectedID != null){
 
         			params = {
 						"vendorId":selectedID
@@ -329,13 +333,20 @@ td {
 						$("#update_Addr").val(obj.vendorAddr);
 						document.getElementById("update_VendorLevel").value=obj.vendorRank;
 						$("#update_Area").val(obj.vendorArea);
+						
+						$("#update_otherName").val(obj.vendorOthername);//////新增///////////////////////////////////
+						$("#update_taxNumber").val(obj.vendorTaxnumber);//////新增///////////////////////////////////
+						$("#update_bankName").val(obj.vendorBankname);//////新增///////////////////////////////////
+						$("#update_bankAccount").val(obj.vendorBankaccount);//////新增///////////////////////////////////
+						$("#update_bankAddr").val(obj.vendorBankaddr);//////新增///////////////////////////////////
+						
 					},"json");
 
         			$('#updateVendor').modal('show');
 
-        		}else{
+ /*第二次修改处     }else{
         			alert("请选择");
-        		}
+        		}*/
         	}
         	
         	function getRootPath(){

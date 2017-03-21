@@ -599,16 +599,20 @@
 		</action>
 		<action name="changeState" class="PurchaseListAction" method="changeState">
 		<result name="success" type="chain">purchaseList</result>
+		<result name="apply" type="redirect">/Material/showApplySelect</result>
 			<!--<result name="success">/pages/purchase/PurchaseList.jsp</result>  -->
 		</action>
 		<action name="changeState1" class="PurchaseListAction" method="changeState1">
 			<result name="success" type="chain">purchaseList</result>
+			<result name="apply" type="redirect">/Material/showApplySelect</result>
 		</action>
 		<action name="changeAccessoryState" class="PurchaseListAction" method="changeAccessoryState">
 			<result name="success" type="chain">accessoryPurchaseList</result>
+			<result name="apply" type="redirect">/Material/showApplySelect</result>
 		</action>
 		<action name="changeAccessoryState1" class="PurchaseListAction" method="changeAccessoryState1">
 			<result name="success" type="chain">accessoryPurchaseList</result>
+			<result name="apply" type="redirect">/Material/showApplySelect</result>
 		</action>
 		<action name="cancelPurchase" class="PurchaseListAction" method="cancelPurchase">
 			<result name="success">/pages/purchase/PurchaseList.jsp</result>
@@ -686,6 +690,12 @@
 			</result>
 			<result name="failed">/index.jsp</result>
 		</action>
+<!--第二次修改001------------------------------------------------------------------------------------------>
+				<action name="materialApplyDetail" class="MaterialAction" method="materialApplyDetail">
+		      <result name="success">/pages/material/material_apply.jsp</result>
+        	<result name="failed">/index.jsp</result>
+		</action>
+<!--第二次修改001----------------------------------------------------------------------------------------------->
 	</package>
 	
 	<package name="vendor" namespace="/Vendor" extends="struts-default,json-default">

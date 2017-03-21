@@ -62,18 +62,26 @@
 					        		<table  class="table-striped table table-hover table-bordered">
 					        			<thead>
 					        				<tr>
-					        					<th>入库时间</th>
-					        					<th>入库总数</th>
+					        	            <th>入库时间</th> 
+					        	       <!-- 第二次修改  ---------->
+					                		 <th>负责人</th> 
+					                   <!-- 第二次修改  ------------>
+					        	            <th>入库总数</th>
+					        	  
 					        				</tr>
 					        			</thead>
-					        			<tbody id = "inputList">
+					          			<tbody id = "inputList">  	
 					        				<s:iterator value="pageBean.list" id="m">
 						        				<tr>
+						        				   
 						        					<td><s:property value="#m[0]"/></td>
+						        	     <!-- 第二次修改  ---------------------->
+						        					<td><s:property value="#m[2]"/></td>
+						        		 <!-- 第二次修改  ----------------------->
 						        					<td><s:property value="#m[1]"/></td>
 						        				</tr>
 					        				</s:iterator>
-					        			</tbody>
+					               </tbody> 	
 					        		</table>
 								    <%@include file="../../../page.jsp" %>    
 					        	</div>
