@@ -65,7 +65,7 @@ public class MaterialAction extends PageAction{
 	public String addMaterial() throws ServletException, IOException{
 Material material = new Material();
 		
-		//信息设置
+		//信息设置        
             //material table//////////////////////////////////////////
 	    String materialCode = "A001";
 	    String materialName = "A001";
