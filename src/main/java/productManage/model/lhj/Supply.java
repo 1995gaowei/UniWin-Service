@@ -1,5 +1,7 @@
 package productManage.model.lhj;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table (name="supply")
 
-public class Supply {
+public class Supply implements Serializable{
 
 	@Id
 	private int supplyId;

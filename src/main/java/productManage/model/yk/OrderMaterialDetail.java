@@ -1,4 +1,5 @@
 package productManage.model.yk;
+import java.io.Serializable;
 /**
  * @author yukuai
  * @date 创建时间2016-02-27
@@ -22,7 +23,7 @@ import productManage.model.lhj.Supply;
 @Entity
 @Table(name="ordermaterialdetail")              //客户订单物料详情表
 
-public class OrderMaterialDetail {
+public class OrderMaterialDetail implements Serializable{
 	@Id                                         //编号
 	private int orderMaterialID;
 	

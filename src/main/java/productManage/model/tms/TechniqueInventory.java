@@ -1,4 +1,6 @@
 package productManage.model.tms;
+import java.io.Serializable;
+
 /**
  * @author tms
  * @date 创建时间2016-02-27
@@ -10,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="techniqueInventory")
 //工艺清单
-public class TechniqueInventory {
+public class TechniqueInventory implements Serializable{
 	public TechniqueInventory(){
 		
 	}

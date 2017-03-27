@@ -4,6 +4,8 @@ package productManage.model.yk;
  * @date 创建时间2016-02-27
  */
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="sampleprocedure")                           //样衣单工序表
 
-public class SampleProcedure {
+public class SampleProcedure implements Serializable{
 	@Id                                                  //编号
 	private int sampleProcedureID;
 	

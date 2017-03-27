@@ -71,6 +71,7 @@
           	</result>
        	</action>
 	</package>
+	
 	<package name="technique" namespace="/Technique" extends="struts-default">
 	    <action name="initAddTechnique" class="AddTechniqueAction" method="initAddTechnique">
 		    <result name="success">/pages/technique/addTechnique.jsp</result>
@@ -91,6 +92,7 @@
 		    <result name="failed">/index.jsp</result>
 		</action>
 	</package>
+    
     <package name="warehouse" namespace="/Warehouse" extends = "struts-default">
         <action name = "materialOut_*" class="MaterialOutAction" method = "{1}">
             <result name="showAllStores">/pages/warehouse/materialOut/showAllStores.jsp</result>
@@ -121,6 +123,7 @@
         
         
     </package>
+	
 	<package name="kezaishou" namespace="/Production" extends="struts-default">
 		<action name="tailor" class="TailorAction" method="queryPage">
 			<result name="success">/pages/production/tailor.jsp</result>
@@ -173,6 +176,7 @@
             <result name="failed">/index.jsp</result>
 		</action>
 	</package>
+	
 	<package name="Orders" namespace="/Orders" extends="struts-default,json-default">
 		<action name="orders" class="OrderAction" method="getAllOrdersByPage">
 			<result name="success">/pages/Orders/OrdersList.jsp</result>
@@ -192,6 +196,7 @@
 			 <result name="success" type="json"></result>
 		</action>
 	</package>
+	
 	<package name="design_order" namespace="/Design_Order" extends="struts-default,json-default">		
 		<action name="showDesignList" class="DesignOrderAction" method="showDesignList">
 			<result name="success">/pages/design_order/showDesignList.jsp</result>
@@ -210,6 +215,7 @@
 		</action>
 		
 	</package>
+	
 	<package name="qc" namespace="/Qc" extends="struts-default,json-default">		
 		<action name="qclist" class="QCListAction" method="showQcList">
 			<result name="success">/pages/qc/QCList.jsp</result>
@@ -243,9 +249,9 @@
 		</action>
 		
 		<action name="getAllDesignByPageAjax" class="NewQCAction" method="getAllDesignByPageAjax">
-			<result type="json">
-	            <param name="root">designJson</param>
-	        </result>
+			<result name="success" type="json">
+				<param name="root">designJson</param>
+			</result>
 	        <result name="failed">/index.jsp</result>
 	        <result name="error">/pages/qc/error.jsp</result>
 		</action>
@@ -273,7 +279,8 @@
 	        <result name="error">/pages/qc/error.jsp</result>
 		</action>
 	</package>
-   <package name="listManage" namespace="/listManage" extends="struts-default,json-default">		
+   
+    <package name="listManage" namespace="/listManage" extends="struts-default,json-default">		
 		<action name="outSourceManage" class="OutSourceManageAction" method="showAllOutSources">
 			<result name="showAllOutSources">/pages/ListManage/outSourceManage.jsp</result>
 			 <result name="failed">/index.jsp</result>
@@ -624,6 +631,7 @@
 			<result name="success">/pages/purchase/AccessoryPurchaseList.jsp</result>
 		</action>
 	</package>
+	
 	<package name="material" namespace="/Material" extends="struts-default,json-default">
 		<action name="showAddMaterial" class="MaterialAction" method="showAddMaterial">
 			<result name="success">/pages/material/material_add.jsp</result>
@@ -697,6 +705,7 @@
 		</action>
 
 	</package>
+	
 	<package name="vendor" namespace="/Vendor" extends="struts-default,json-default">
 		<action name="showVendorList" class="VendorAction" method="showVendorList">
 			<result name="success">/pages/vendor/vendor_manage.jsp</result>
@@ -830,6 +839,7 @@
 			<result name="failed">/index.jsp</result>
 		</action>
 	</package>
+	
 	<package name="Inquiry" namespace="/Inquiries" extends="struts-default">
 		<action name="inquiry" class="InquiryAction" method="getInquiryByID">
 			<result name="success">/pages/Inquiry/orders_inquiry.jsp</result>
@@ -855,6 +865,7 @@
 		</action>
 		
 	</package>
+	
 	<package name="Ajax" namespace="/Warehouse" extends="json-default">
 	<action name="getDetail" class="WarehousePublicAction" method="getDetail">
 	       <result type="json">

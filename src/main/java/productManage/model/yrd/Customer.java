@@ -1,5 +1,6 @@
 package productManage.model.yrd;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,7 +23,7 @@ import productManage.model.yk.Orders;
 @Entity
 @Table(name="customer")
 
-public class Customer {
+public class Customer implements Serializable{
 
 	@Id
 	private int customerID;

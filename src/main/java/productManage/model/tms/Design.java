@@ -1,5 +1,6 @@
 package productManage.model.tms;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -26,7 +27,7 @@ import productManage.model.yk.SampleOrders;
  */
 @Entity
 @Table(name="design")
-public class Design {
+public class Design implements Serializable{
 	
 	public Design() {
 	}

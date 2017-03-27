@@ -1,5 +1,6 @@
 package productManage.model.wjx;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
@@ -25,7 +26,7 @@ import productManage.model.tyc.Purchase;
  */
 @Entity
 @Table(name="materialinput")
-public class MaterialInput {
+public class MaterialInput implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY) 
     private int materialInputID;

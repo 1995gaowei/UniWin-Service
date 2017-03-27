@@ -2,6 +2,8 @@ package productManage.model.wcy;
 
 
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,7 +19,7 @@ import productManage.model.zky.Production;
  */
 @Entity
 @Table(name="qc")
-public class Qc {
+public class Qc implements Serializable{
     
 	
 	@Id

@@ -1,5 +1,6 @@
 package productManage.model.lhj;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table (name="vendor")
 
-public class Vendor {
+public class Vendor implements Serializable{
 	
 	@Id
 	private int vendorId;

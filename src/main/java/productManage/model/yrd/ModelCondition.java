@@ -1,5 +1,6 @@
 package productManage.model.yrd;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="modelcondition")                  //制版单积压数表 
 
-public class ModelCondition {
+public class ModelCondition implements Serializable{
 	
 	@Id
 	private int modelConditionID;

@@ -1,5 +1,7 @@
 package productManage.model.cs;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="receivedetail")
 
-public class ReceiveDetail {
+public class ReceiveDetail implements Serializable{
 	
 	@Id
 	private int receiveDetailID;

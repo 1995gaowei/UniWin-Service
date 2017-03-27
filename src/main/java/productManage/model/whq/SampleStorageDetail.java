@@ -1,5 +1,6 @@
 package productManage.model.whq;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -23,7 +24,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="samplestoragedetail")
-public class SampleStorageDetail {
+public class SampleStorageDetail implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int sampleStorageDetailID;   //主键ID

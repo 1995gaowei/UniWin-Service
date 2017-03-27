@@ -1,5 +1,6 @@
 package productManage.model.cs;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +22,7 @@ import productManage.model.User;
 @Entity
 @Table(name="receive")
 
-public class Receive {
+public class Receive implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)

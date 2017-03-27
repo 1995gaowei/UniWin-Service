@@ -1,6 +1,7 @@
 package productManage.action.qc;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -107,7 +108,6 @@ public class NewQCAction extends PageAction{
 	public void setQcService(QcService qcService) {
 		this.qcService = qcService;
 	}
-	
 	
 	public String getAllDesignByPageAjax(){
 		if (request.getSession().getAttribute("account")!=null){

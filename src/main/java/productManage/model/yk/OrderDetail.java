@@ -1,4 +1,6 @@
 package productManage.model.yk;
+import java.io.Serializable;
+
 /**
  * @author yukuai
  * @date 创建时间2016-02-27
@@ -20,7 +22,7 @@ import productManage.model.zky.Tailor;
 @Entity
 @Table(name="orderdetail")                      //客户订单颜色表
 
-public class OrderDetail {
+public class OrderDetail implements Serializable{
 	@Id                                         //编号
 	private int orderDetailID;
 	

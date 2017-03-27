@@ -1,5 +1,7 @@
 package productManage.model.wy;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="abnormalParameter")
 
-public class AbnormalParameter {
+public class AbnormalParameter implements Serializable{
 	@Id
 	private int abnormalParameterID;
 	

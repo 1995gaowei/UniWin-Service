@@ -1,5 +1,6 @@
 package productManage.model.cs;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +25,7 @@ import productManage.model.zky.Production;
 @Entity
 @Table(name="outsource")
 
-public class OutSource {
+public class OutSource implements Serializable{
 	
 	@Id
 	private int outsourceID;

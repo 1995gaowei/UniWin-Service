@@ -1,4 +1,5 @@
 package productManage.model.tms;
+import java.io.Serializable;
 /**
  * @author tms
  * @date 创建时间2016-02-27
@@ -21,7 +22,7 @@ import productManage.model.yrd.Customer;
 @Entity
 @Table(name="technique")
 //款式工艺单
-public class Technique {
+public class Technique implements Serializable{
 	public Technique(){
 		
 	}

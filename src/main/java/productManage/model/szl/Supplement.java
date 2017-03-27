@@ -1,5 +1,6 @@
 package productManage.model.szl;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +27,7 @@ import productManage.model.zky.Production;
 
 @Entity
 @Table(name="supplement")
-public class Supplement {
+public class Supplement implements Serializable{
 	public Supplement(){}
     public Supplement(int supplementID, Production production, User user,
 			String supplementCode, String supplementState,

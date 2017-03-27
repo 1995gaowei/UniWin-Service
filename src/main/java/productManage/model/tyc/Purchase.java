@@ -1,6 +1,7 @@
 package productManage.model.tyc;
 
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -26,7 +27,7 @@ import productManage.model.zky.Production;
 @Entity
 @Table(name="purchase")
 
-public class Purchase {
+public class Purchase implements Serializable{
 	
 	@Id
 	private int purchaseID;//采购单ID

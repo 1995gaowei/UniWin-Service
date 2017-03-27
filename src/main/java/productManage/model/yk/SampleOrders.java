@@ -4,6 +4,8 @@ package productManage.model.yk;
  * @date 创建时间2016-02-27
  */
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +21,7 @@ import productManage.model.tms.Design;
 @Entity
 @Table(name="sampleorder")                       //样衣单表
 
-public class SampleOrders {
+public class SampleOrders implements Serializable{
 	@Id                                         //样衣单编号
 	private int sampleOrderID;
 	

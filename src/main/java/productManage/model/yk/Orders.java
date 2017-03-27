@@ -4,6 +4,7 @@ package productManage.model.yk;
  * @date 创建时间2016-02-27
  */
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import productManage.model.User;
 import productManage.model.tms.Design;
 import productManage.model.yrd.Customer;
@@ -27,7 +30,7 @@ import productManage.model.zky.Production;
 @Entity
 @Table(name="orders")                                //客户订单表
 
-public class Orders {
+public class Orders implements Serializable {
 	@Id                                              //客户订单编号
 	private int orderID;
 	
@@ -168,6 +171,7 @@ public class Orders {
 		this.orderMaterialDetails = orderMaterialDetails;
 	}
 
+	@JSON(serialize=false)
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -176,10 +180,12 @@ public class Orders {
 		this.customer = customer;
 	}
 
+	@JSON(serialize=false)
 	public User getCharge() {
 		return charge;
 	}
-
+	
+	@JSON(serialize=false)
 	public Production getProduction() {
 		return production;
 	}
@@ -187,7 +193,8 @@ public class Orders {
 	public void setProduction(Production production) {
 		this.production = production;
 	}
-
+	
+	@JSON(serialize=false)
 	public Design getDesign() {
 		return design;
 	}
@@ -203,7 +210,7 @@ public class Orders {
 	public void setOrderDesignIsNew(int orderDesignIsNew) {
 		this.orderDesignIsNew = orderDesignIsNew;
 	}
-	
+	@JSON(serialize=false)
 	public Inquiry getInquiry() {
 		return inquiry;
 	}
@@ -211,7 +218,7 @@ public class Orders {
 	public void setInquiry(Inquiry inquiry) {
 		this.inquiry = inquiry;
 	}
-
+	@JSON(serialize=false)
 	public SampleOrders getSampleOrders() {
 		return sampleOrders;
 	}
@@ -223,11 +230,11 @@ public class Orders {
 	public int getOrderID(){
 		return orderID;
 	}
-	
+	@JSON(serialize=false)
 	public User getOrderMaker(){
 		return orderMaker;
 	}
-	
+	@JSON(serialize=false)
 	public User getChargeId(){
 		return charge;
 	}
@@ -375,7 +382,7 @@ public class Orders {
 	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
-
+	@JSON(serialize=false)
 	public Date getOrderFinishDate() {
 		return orderFinishDate;
 	}
@@ -383,7 +390,7 @@ public class Orders {
 	public void setOrderFinishDate(Date orderFinishDate) {
 		this.orderFinishDate = orderFinishDate;
 	}
-
+	@JSON(serialize=false)
 	public Set<OrderDetail> getOrderDetails() {
 		return orderDetails;
 	}
@@ -391,11 +398,10 @@ public class Orders {
 	public void setOrderDetails(Set<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
-
+	@JSON(serialize=false)
 	public Set<OrderMaterialDetail> getOrderMaterialDetails() {
 		return orderMaterialDetails;
 	}
-
 	public void setOrderMaterialDetails(
 			Set<OrderMaterialDetail> orderMaterialDetails) {
 		this.orderMaterialDetails = orderMaterialDetails;

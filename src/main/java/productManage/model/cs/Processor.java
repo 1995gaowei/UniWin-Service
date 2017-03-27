@@ -1,5 +1,6 @@
 package productManage.model.cs;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +18,7 @@ import productManage.model.tms.Technique;
 @Entity
 @Table(name="processor")
 
-public class Processor {
+public class Processor implements Serializable {
 	
 	@Id
 	private int processorID;

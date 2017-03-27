@@ -1,5 +1,7 @@
 package productManage.model.wy;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="user")
 
-public class MyUser {
+public class MyUser implements Serializable{
 	@Id
 	private int userId;
 	

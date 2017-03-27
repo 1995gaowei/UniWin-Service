@@ -1,4 +1,5 @@
 package productManage.model.yk;
+import java.io.Serializable;
 /**
  * @author yukuai
  * @date 创建时间2016-02-27
@@ -24,7 +25,7 @@ import productManage.model.tms.Design;
 @Entity
 @Table(name="inquiry")                       //询价单表
 
-public class Inquiry {
+public class Inquiry implements Serializable{
 
 	@Id                                     //询价单编号
 	private int inquiryID;

@@ -1,4 +1,6 @@
 package productManage.model.tms;
+import java.io.Serializable;
+
 /**
  * @author tms
  * @date 创建时间2016-02-27
@@ -10,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="specificTechnique")
 //具体工艺表
-public class SpecificTechnique {
+public class SpecificTechnique implements Serializable{
 	public SpecificTechnique(int specificTechID, int techID,
 			String specificTechPartName, String specificTechnique) {
 		super();

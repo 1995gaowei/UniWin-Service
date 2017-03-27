@@ -1,5 +1,6 @@
 package productManage.model.whq;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ import productManage.model.yk.Orders;
 
 @Entity
 @Table(name="sample")
-public class Sample {
+public class Sample implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int sampleID;  //样衣ID

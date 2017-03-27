@@ -26,9 +26,11 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import productManage.action.PageAction;
+import productManage.model.User;
 import productManage.model.lhj.Bom;
 import productManage.model.lhj.Material;
 import productManage.model.tms.Design;
+import productManage.model.yk.Orders;
 import productManage.service.material.BomService;
 import productManage.service.material.MaterialService;
 import productManage.service.technique.DesignService;
@@ -476,4 +478,5 @@ public class BomAction extends PageAction{
 		this.putawayDate = putawayDate;
 	}
 }
+
 
