@@ -451,6 +451,12 @@
 
 	<package name="system" namespace="/System" extends="struts-default,json-default">
 		<action name="userLogin" class="LoginAction" method="login">
+			<!--<result name="success" type="json">
+				<param name="root">jsonMap</param>
+			</result>
+			<result name="error" type="json">
+				<param name="root">jsonMap</param>
+			</result>   -->
 			<result name="success">/index.jsp</result>
 			<result name="error">/error.jsp</result>
 			<result name="failed">/index.jsp</result>
@@ -729,11 +735,21 @@
 	
 	<package name="bom" namespace="/Bom" extends="struts-default,json-default">
 		<action name="showDesignList" class="BomAction" method="showDesignList">
+			<!-- 
 			<result name="success">/pages/bom/bom_manage.jsp</result>
-			<result name="failed">/index.jsp</result>
+			<result name="failed">/index.jsp</result> -->
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+			</result>
+			<result name="error" type="json">
+				<param name="root">jsonMap</param>
+			</result>
 		</action>
 		<action name="getBom" class="BomAction" method="getBom">
-			<result name="success">/pages/bom/bom_update.jsp</result>
+			<!-- <result name="success">/pages/bom/bom_update.jsp</result> -->
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+			</result>
 			<result name="failed">/index.jsp</result>
 		</action>
 		<action name="showAddDesign" class="BomAction" method="showAddDesign">
@@ -758,11 +774,17 @@
 			<result name="failed">/index.jsp</result>
 		</action>
 		<action name="addBom" class="BomAction" method="addBom">
-			<result name="success" type="redirect">Bom/showDesignList</result>
+			<!-- <result name="success" type="redirect">Bom/showDesignList</result>-->
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+			</result>
 			<result name="failed">/index.jsp</result>
 		</action>
 		<action name="deleteBom" class="BomAction" method="deleteBom">
-			<result name="success" type="redirect">Bom/showDesignList</result>
+			<!-- <result name="success" type="redirect">Bom/showDesignList</result> -->
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+			</result>
 			<result name="failed">/index.jsp</result>
 		</action>
 		<action name="showUpload" class="BomAction" method="showUpload">
@@ -771,7 +793,10 @@
 			<result name="failed">/index.jsp</result>
 		</action>
 		<action name="upload" class="BomAction" method="upload">
-			<result name="success" type="redirect">/Bom/showUpload</result>
+			<!-- <result name="success" type="redirect">/Bom/showUpload</result> -->
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+			</result>
 			<result name="error">/error.jsp</result>
 			<result name="failed">/index.jsp</result>
 		</action>

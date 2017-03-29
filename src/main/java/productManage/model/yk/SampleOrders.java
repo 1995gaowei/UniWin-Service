@@ -19,7 +19,7 @@ import productManage.model.User;
 import productManage.model.tms.Design;
 
 @Entity
-@Table(name="sampleorder")                       //样衣单表
+@Table(name="sampleOrder")                       //样衣单表
 
 public class SampleOrders implements Serializable{
 	@Id                                         //样衣单编号

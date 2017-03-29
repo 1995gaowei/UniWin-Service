@@ -1,7 +1,10 @@
 package productManage.action;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import productManage.model.wy.Authority;
 import productManage.service.system.AuthorityService;
@@ -13,12 +16,30 @@ public class LoginAction extends BaseAction{
 	@Autowired
 	private AuthorityService authorityService;
 	
+//	private Map<String, Object> jsonMap;
+//	
+//	public Map<String, Object> getJsonMap() {
+//		return jsonMap;
+//	}
+//
+//	public void setJsonMap(Map<String, Object> jsonMap) {
+//		this.jsonMap = jsonMap;
+//	}
+
 	public String login(){
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
 		boolean loginResult = userService.login(account, password);
+//		jsonMap = new HashMap<>();
 		if (loginResult){
-			List<Authority>authoList = userService.myAuthorities(account);
+//			jsonMap.put("result", "success");
+			List<Authority> authoList = userService.myAuthorities(account);
+//			Map<String, Object> dataMap = new HashMap<>();
+//			dataMap.put("account", account);
+//			dataMap.put("highAutho", authorityService.high(authoList));
+//			dataMap.put("highMiddleAutho", authorityService.highMiddle(authoList));
+//			dataMap.put("authorityList", authoList);
+//			jsonMap.put("data", dataMap);
 			request.getSession().setAttribute("account", account);
 			request.getSession().setAttribute("highAutho", authorityService.high(authoList));
 			request.getSession().setAttribute("highMiddleAutho", authorityService.highMiddle(authoList));
@@ -31,8 +52,11 @@ public class LoginAction extends BaseAction{
 			}
 			return SUCCESS;
 		}
-		else 
+		else {
+//			jsonMap.put("result", "failed");
 			return ERROR;
+		}
+			
 	}
 	
 	public String logout(){

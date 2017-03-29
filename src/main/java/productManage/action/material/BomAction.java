@@ -59,16 +59,23 @@ public class BomAction extends PageAction{
 	
 	private String designTechProcedure="";
 	
+	private Map<String, Object> jsonMap;
 	
-	
-	
-	
+	public Map<String, Object> getJsonMap() {
+		return jsonMap;
+	}
+
+	public void setJsonMap(Map<String, Object> jsonMap) {
+		this.jsonMap = jsonMap;
+	}
+
 	public String showDesignList(){
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(TechniqueConstants.SEARCH_TECHNIQUE_PARAMS[0],designCode);
 		params.put(TechniqueConstants.SEARCH_TECHNIQUE_PARAMS[1], putawayDate);
         params.put(TechniqueConstants.SEARCH_TECHNIQUE_PARAMS[3], designName);
         params.put(TechniqueConstants.SEARCH_TECHNIQUE_PARAMS[4], designTechProcedure);
+        jsonMap = new HashMap<>();
 		try {
 			this.pageBean = bomservice.queryDesign(this.rowsPerPage, this.page, params);
 			List<Design> list = this.pageBean.getList();		
@@ -82,9 +89,12 @@ public class BomAction extends PageAction{
 			
 			this.pageBean.setList(list1);*/
 			this.pageBean.setList(list);
+			jsonMap.put("result", "success");
+			jsonMap.put("data", list);
 		} catch (Exception e) {
 			e.printStackTrace();
 			this.pageBean=new PageBean();
+			jsonMap.put("result", "failed");
 			return ERROR;
 		}
 		return SUCCESS;
@@ -143,6 +153,9 @@ public class BomAction extends PageAction{
 		}
 
 		this.materialMes = materialMes;
+		jsonMap = new HashMap<>();
+		jsonMap.put("result", "success");
+		jsonMap.put("data", materialMes);
 		return SUCCESS;
 	}
 
@@ -190,6 +203,8 @@ public class BomAction extends PageAction{
 		Design d = designservice.getByCode(designCode);
 		
 		bomservice.deleteBom(m, d);
+		jsonMap = new HashMap<>();
+		jsonMap.put("result", "success");
 		return SUCCESS;
 	}
 	
@@ -247,6 +262,8 @@ public class BomAction extends PageAction{
 		bomservice.addDesign(design);
 		
 		this.designCode="";
+		jsonMap = new HashMap<>();
+		jsonMap.put("result", "success");
 		return SUCCESS;
 	}
 	
@@ -376,6 +393,8 @@ public class BomAction extends PageAction{
             //循环上传每个文件   
             uploadFile(i);
         }
+        jsonMap = new HashMap<>();
+        jsonMap.put("result", "success");
 		return SUCCESS;
 	}
     //执行上传功能   
