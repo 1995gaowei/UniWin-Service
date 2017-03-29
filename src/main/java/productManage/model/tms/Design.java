@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import productManage.model.cs.OutSource;
 import productManage.model.lhj.Bom;
 import productManage.model.whq.Sample;
@@ -93,19 +95,24 @@ public class Design implements Serializable{
 	 */
 	@OneToOne(mappedBy="design")
 	private Technique technique;
-
+	
+	@JSON(serialize=false)
 	public Set<Orders> getOrders() {
 		return orders;
 	}
 	public void setOrders(Set<Orders> orders) {
 		this.orders = orders;
 	}
+	
+	@JSON(serialize=false)
 	public Set<SampleOrders> getSampleOrders() {
 		return sampleOrders;
 	}
 	public void setSampleOrders(Set<SampleOrders> sampleOrders) {
 		this.sampleOrders = sampleOrders;
 	}
+	
+	@JSON(serialize=false)
 	public Set<Inquiry> getInquiry() {
 		return inquiry;
 	}
@@ -142,6 +149,8 @@ public class Design implements Serializable{
 	public void setDesignTechProcedure(String designTechProcedure) {
 		this.designTechProcedure = designTechProcedure;
 	}
+	
+	@JSON(serialize=false)
 	public Date getDesignPutawayDate() {
 		return designPutawayDate;
 	}
@@ -197,19 +206,23 @@ public class Design implements Serializable{
 	@OneToMany(mappedBy="design")
 	private Set<OutSource> outSources = new HashSet<OutSource>();
 	
-	
+	@JSON(serialize=false)
 	public Set<Bom> getBoms() {
 		return boms;
 	}
 	public void setBoms(Set<Bom> boms) {
 		this.boms = boms;
 	}
+	
+	@JSON(serialize=false)
 	public Set<OutSource> getOutSources() {
 		return outSources;
 	}
 	public void setOutSources(Set<OutSource> outSources) {
 		this.outSources = outSources;
 	}
+	
+	@JSON(serialize=false)
     public Set<Sample> getSamples() {
         return samples;
     }
@@ -222,6 +235,8 @@ public class Design implements Serializable{
 	public void setDesignType(String designType) {
 		this.designType = designType;
 	}
+	
+	@JSON(serialize=false)
 	public Technique getTechnique() {
 		return technique;
 	}
