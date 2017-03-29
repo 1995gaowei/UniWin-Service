@@ -689,13 +689,13 @@
 		</action>
 		<action name="getVendorList" class="MaterialAction" method="getVendorList">
 			<result name="success" type="json">
-				<param name="root">vendorlistAjax</param>
+				<param name="root">jsonMap</param>
 			</result>
 			<result name="failed">/index.jsp</result>
 		</action>
 		<action name="getWarehouseList" class="MaterialAction" method="getWarehouseList">
 			<result name="success" type="json">
-				<param name="root">warehouselistAjax</param>
+				<param name="root">jsonMap</param>
 			</result>
 			<result name="failed">/index.jsp</result>
 		</action>

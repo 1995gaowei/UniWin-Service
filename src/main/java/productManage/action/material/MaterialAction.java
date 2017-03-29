@@ -1,6 +1,7 @@
 package productManage.action.material;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -269,25 +270,31 @@ Material material = new Material();
 	public void setVendorlistAjax(String vendorlistAjax) {
 		this.vendorlistAjax = vendorlistAjax;
 	}
+	
+	Map<String ,Object> jsonMap ;
+
+	public Map<String, Object> getJsonMap() {
+		return jsonMap;
+	}
+
+	public void setJsonMap(Map<String, Object> jsonMap) {
+		this.jsonMap = jsonMap;
+	}
 
 	public String getVendorList(){
 		List<Vendor> list = vendorservice.getVendorList();
-		
-		JSONArray json = new JSONArray();
+		jsonMap = new HashMap<>();
+		List<Vendor> dataLsit = new ArrayList<>();
 		for(Vendor vendor:list){
-			JSONObject jo = new JSONObject();
 			try {
-				jo.put("vendorID",vendor.getVendorId());
-				jo.put("vendorName", vendor.getVendorName());
-				jo.put("vendorAddr", vendor.getVendorAddr());
-				json.put(jo);
+				dataLsit.add(vendor);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		setVendorlistAjax(json.toString());
-		System.out.println(json.toString());
+		jsonMap.put("result", "success");
+		jsonMap.put("data", dataLsit);
 		return SUCCESS;
 	}
 	
@@ -301,24 +308,24 @@ Material material = new Material();
 	public void setWarehouselistAjax(String warehouselistAjax) {
 		this.warehouselistAjax = warehouselistAjax;
 	}
+	
+	
 
 	public String getWarehouseList(){
 		List<WareHouse> list = materialservice.getWareHouseList();
-		
-		JSONArray json = new JSONArray();
+		jsonMap = new HashMap<>();
+		List<WareHouse> dataList = new ArrayList<>();
 		for(WareHouse warehouse:list){
-			JSONObject jo = new JSONObject();
+			
 			try {
-				jo.put("warehouseid",warehouse.getWarehouseid());
-				jo.put("location", warehouse.getLocation());
-				json.put(jo);
+				dataList.add(warehouse);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		setWarehouselistAjax(json.toString());
-		System.out.println(json.toString());
+		jsonMap.put("result", "success");
+		jsonMap.put("data", dataList);
 		return SUCCESS;
 	}
 	

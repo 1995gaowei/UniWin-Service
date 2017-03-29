@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import productManage.model.wjx.MaterialInput;
 import productManage.model.wjx.MaterialOutput;
 import productManage.model.wjx.Store;
@@ -76,7 +78,9 @@ public class WareHouse implements Serializable{
 	public void setMaxCapacity(int maxCapacity) {
 		this.maxCapacity = maxCapacity;
 	}
-
+	
+	
+	@JSON(serialize=false)
     public Set<MaterialInput> getMaterialInputs() {
         return materialInputs;
     }
@@ -85,6 +89,7 @@ public class WareHouse implements Serializable{
         this.materialInputs = materialInputs;
     }
 
+    @JSON(serialize=false)
     public Set<MaterialOutput> getMaterialOnputs() {
         return materialOnputs;
     }
@@ -92,7 +97,8 @@ public class WareHouse implements Serializable{
     public void setMaterialOnputs(Set<MaterialOutput> materialOnputs) {
         this.materialOnputs = materialOnputs;
     }
-
+    
+    @JSON(serialize=false)
     public Set<Store> getStores() {
         return stores;
     }

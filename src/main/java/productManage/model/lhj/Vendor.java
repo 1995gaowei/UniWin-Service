@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 @Entity
 @Table (name="vendor")
 
@@ -98,6 +100,7 @@ public class Vendor implements Serializable{
 		this.vendorRank = vendorRank;
 	}
 	
+	@JSON(serialize=false)
 	public Set<Supply> getSupplys() {
 		return supplys;
 	}
