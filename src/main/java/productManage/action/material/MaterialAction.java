@@ -282,6 +282,7 @@ Material material = new Material();
 	}
 
 	public String getVendorList(){
+		response.setHeader("Access-Control-Allow-Origin", "*"); 
 		List<Vendor> list = vendorservice.getVendorList();
 		jsonMap = new HashMap<>();
 		List<Vendor> dataLsit = new ArrayList<>();
@@ -312,6 +313,7 @@ Material material = new Material();
 	
 
 	public String getWarehouseList(){
+		response.setHeader("Access-Control-Allow-Origin", "*"); 
 		List<WareHouse> list = materialservice.getWareHouseList();
 		jsonMap = new HashMap<>();
 		List<WareHouse> dataList = new ArrayList<>();
