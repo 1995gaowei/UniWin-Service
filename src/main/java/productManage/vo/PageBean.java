@@ -8,7 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 @Component
 public class PageBean {
-	public static int DEFAULT_PAGE_SIZE=10;
+	public static int DEFAULT_PAGE_SIZE=100000;
 	private List list=new ArrayList() ;// 要返回的某一页的记录列表
 
 	private int allRow;// 总记录数

@@ -132,16 +132,21 @@ Material material = new Material();
 	}
 	
 	public String showMaterialList(){
+		response.setHeader("Access-Control-Allow-Origin", "*"); 
 		String materialName = request.getParameter("materialName");
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(MaterialConstants.SEARCH_MATERIAL_PARAMS[0], materialName);
+		jsonMap = new HashMap<>();
 		try {
 			this.pageBean = materialservice.queryMaterial(this.rowsPerPage, this.page, params);
 		} catch (Exception e) {
 			e.printStackTrace();
 			this.pageBean=new PageBean();
-			return ERROR;
+			jsonMap.put("result", "failed");
+			return SUCCESS;
 		}
+		jsonMap.put("result", "success");
+		jsonMap.put("data", this.pageBean.getList());
 		return SUCCESS;
 	}
 	
