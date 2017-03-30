@@ -698,6 +698,11 @@
 				<param name="root">jsonMap</param>
 			</result>
 		</action>
+		<action name="getMaterialList" class="MaterialAction" method="getMaterialList">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+			</result>
+		</action>
 
 				<action name="materialApplyDetail" class="MaterialAction" method="materialApplyDetail">
 		      <result name="success">/pages/material/material_apply.jsp</result>

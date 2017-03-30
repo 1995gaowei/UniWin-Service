@@ -320,6 +320,18 @@ Material material = new Material();
 		return SUCCESS;
 	}
 	
+	public String getMaterialList() {
+		response.setHeader("Access-Control-Allow-Origin", "*"); 
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put(MaterialConstants.SEARCH_MATERIAL_PARAMS[0], null);
+		List<Material> list = materialservice.getMaterialList(params);
+		System.out.println(list.size());
+		jsonMap = new HashMap<>();
+		jsonMap.put("result", "success");
+		jsonMap.put("data", list);
+		return SUCCESS;
+	}
+	
 	//物料详情、修改==============================================================
 	private Material materialvo;
 	

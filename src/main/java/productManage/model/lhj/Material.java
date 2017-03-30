@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 import javax.persistence.Transient;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import productManage.model.tms.Design;
 import productManage.model.wjx.MaterialInput;
 import productManage.model.wjx.MaterialOutput;
@@ -176,6 +178,7 @@ public class Material implements Serializable{
         this.modificationDate = modificationDate;
     }
     
+    @JSON(serialize=false)
 	@OneToMany(mappedBy="material",cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch=FetchType.LAZY)
     public Set<MaterialInput> getMaterialInputs() {
         return materialInputs;
@@ -184,6 +187,7 @@ public class Material implements Serializable{
         this.materialInputs = materialInputs;
     }
     
+    @JSON(serialize=false)
     @OneToMany(targetEntity=MaterialOutput.class,mappedBy="material",cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     public Set<MaterialOutput> getMaterialOutputs() {
         return materialOutputs;
@@ -192,6 +196,7 @@ public class Material implements Serializable{
         this.materialOutputs = materialOutputs;
     }
     
+    @JSON(serialize=false)
     @OneToMany(targetEntity=Store.class,mappedBy="material")    
     public Set<Store> getStores() {
         return stores;
@@ -200,7 +205,7 @@ public class Material implements Serializable{
         this.stores = stores;
     }
     
-	
+    @JSON(serialize=false)
     @OneToMany(mappedBy="material",cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch=FetchType.LAZY)    
 	public Set<Supply> getSupplys() {
 		return supplys;
@@ -209,6 +214,7 @@ public class Material implements Serializable{
 		this.supplys = supplys;
 	}
 	
+	@JSON(serialize=false)
 	@OneToMany(mappedBy="material",cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
 	public Set<Bom> getBoms() {
 		return boms;
@@ -216,6 +222,8 @@ public class Material implements Serializable{
 	public void setBoms(Set<Bom> boms) {
 		this.boms = boms;
 	}
+	
+	@JSON(serialize=false)
 	@OneToMany(mappedBy="material",cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch=FetchType.LAZY)
 	public Set<Materialapply> getMaterialApplys() {
 		return materialApplys;

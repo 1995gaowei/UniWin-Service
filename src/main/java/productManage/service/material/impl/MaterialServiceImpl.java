@@ -208,6 +208,7 @@ public class MaterialServiceImpl implements MaterialService{
 		}
 		
 		List<Material> materialList = materialdao.getMaterialList(hql);
+		System.out.println(materialList.size());
 		return materialList;
 	}
 
