@@ -640,9 +640,9 @@
 			<result name="failed">/index.jsp</result>
 		</action>
 		<action name="addMaterial" class="MaterialAction" method="addMaterial">
-			<result name="success" type="redirect">/Material/showAddMaterial</result>
-			<result name="error">/error.jsp</result>
-			<result name="failed">/index.jsp</result>
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+			</result>
 		</action>
 		<action name="showMaterialList" class="MaterialAction" method="showMaterialList">
 			<result name="success">/pages/material/material_manage.jsp</result>
@@ -691,13 +691,11 @@
 			<result name="success" type="json">
 				<param name="root">jsonMap</param>
 			</result>
-			<result name="failed">/index.jsp</result>
 		</action>
 		<action name="getWarehouseList" class="MaterialAction" method="getWarehouseList">
 			<result name="success" type="json">
 				<param name="root">jsonMap</param>
 			</result>
-			<result name="failed">/index.jsp</result>
 		</action>
 
 				<action name="materialApplyDetail" class="MaterialAction" method="materialApplyDetail">

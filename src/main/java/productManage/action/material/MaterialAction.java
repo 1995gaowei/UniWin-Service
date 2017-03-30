@@ -68,6 +68,7 @@ Material material = new Material();
 		
 		//信息设置        
             //material table//////////////////////////////////////////
+		response.setHeader("Access-Control-Allow-Origin", "*"); 
 	    String materialCode = "A001";
 	    String materialName = "A001";
 	    String materialType = "A001";
@@ -125,7 +126,8 @@ Material material = new Material();
 		materialservice.addStore(store);
 
         //materialinput=============================================新增物料修改处
-		
+		jsonMap = new HashMap<>();
+		jsonMap.put("result", "success");
 		return SUCCESS;
 	}
 	
@@ -285,17 +287,9 @@ Material material = new Material();
 		response.setHeader("Access-Control-Allow-Origin", "*"); 
 		List<Vendor> list = vendorservice.getVendorList();
 		jsonMap = new HashMap<>();
-		List<Vendor> dataLsit = new ArrayList<>();
-		for(Vendor vendor:list){
-			try {
-				dataLsit.add(vendor);
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		
 		jsonMap.put("result", "success");
-		jsonMap.put("data", dataLsit);
+		jsonMap.put("data", list);
 		return SUCCESS;
 	}
 	
@@ -316,18 +310,8 @@ Material material = new Material();
 		response.setHeader("Access-Control-Allow-Origin", "*"); 
 		List<WareHouse> list = materialservice.getWareHouseList();
 		jsonMap = new HashMap<>();
-		List<WareHouse> dataList = new ArrayList<>();
-		for(WareHouse warehouse:list){
-			
-			try {
-				dataList.add(warehouse);
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 		jsonMap.put("result", "success");
-		jsonMap.put("data", dataList);
+		jsonMap.put("data", list);
 		return SUCCESS;
 	}
 	
