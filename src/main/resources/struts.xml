@@ -670,17 +670,19 @@
 			<result name="failed">/index.jsp</result>
 		</action>
 		<action name="showApplySelect" class="MaterialAction" method="showApplySelect">
-			<result name="success">/pages/material/material_applySelect.jsp</result>
-			<result name="failed">/index.jsp</result>
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+			</result>
 		</action>
 		<action name="showMaterialListByCND" class="MaterialAction" method="showMaterialListByCND">
-			<result name="success">/pages/material/material_applySelect.jsp</result>
-			<result name="failed">/index.jsp</result>
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+			</result>
 		</action>
-		<action name="addMaterialapply" class="MaterialAction" method="addMaterialapply">
-			<result name="success">/pages/material/material_applySelect.jsp</result>
-			<result name="error">/error.jsp</result>
-			<result name="failed">/index.jsp</result>
+		<action name="addMaterialApply" class="MaterialAction" method="addMaterialapply">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+			</result>
 		</action>
 		<action name="showMaterialDetail" class="MaterialAction" method="showMaterialDetail">
 			<result name="success" type="json">

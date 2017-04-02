@@ -181,7 +181,8 @@ Material material = new Material();
 	 
 	 public String showMaterialListByCND(){
 		    
-	    	
+		 response.setHeader("Access-Control-Allow-Origin", "*"); 
+		 jsonMap = new HashMap<>();
 		    this.designCode=request.getParameter("designCode");
 	        Map<String, Object> params = new HashMap<String, Object>();	
 	  		params.put(MaterialConstants.SEARCH_MATERIAL_PARAMS[0], this.materialName);
@@ -193,26 +194,30 @@ Material material = new Material();
 	  		} catch (Exception e) {
 	  			e.printStackTrace();
 	  			this.pageBean=new PageBean();
-	  			return ERROR;
+	  			jsonMap.put("result", "failed");
+	  			return SUCCESS;
 	  		}
-	  		return SUCCESS;
+	  		jsonMap.put("result", "success");
+			jsonMap.put("data", this.pageBean.getList());
+			return SUCCESS;
 	      }
 	 
 	 public String addMaterialapply() throws ServletException, IOException{
+		 response.setHeader("Access-Control-Allow-Origin", "*"); 
 			Materialapply  materialApply = new Materialapply();
 			System.out.println("start addMaterialapply");
 			//信息设置
 	            //material table//////////////////////////////////////////
 		    String materialCode = "A001";
-		    String materialApplyCode="A001";
+		    String materialApplyCode="APL101";
 		    float materialApplyVol=0;
 		    Date materialApplyDate = new Date();
 		    String applyComment="A001";	    
-		    User user=userservice.getUserByAccount((String)request.getSession().getAttribute("account"));
+		    User user=userservice.getUserByAccount(request.getParameter("account"));
 		  
 		   
 		    materialCode = request.getParameter("materialCode");
-		    materialApplyCode=request.getParameter("materialApplyCode");
+//		    materialApplyCode=request.getParameter("materialApplyCode");
 		    materialApplyVol=Float.parseFloat(request.getParameter("materialApplyVol"));
 		    applyComment = request.getParameter("applyComment");
 		    Material material=materialservice.getMaterialByCode(materialCode);
@@ -224,6 +229,9 @@ Material material = new Material();
 		    materialApply.setMatrialApplyDate(new java.sql.Date(materialApplyDate.getTime()));
 		    materialApply.setUser(user);
 			materialservice.addMaterialApply(materialApply);	
+			
+			jsonMap = new HashMap<>();
+			jsonMap.put("result", "success");
 			return SUCCESS;
 		}
 	 
