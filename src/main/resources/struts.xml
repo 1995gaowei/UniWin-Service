@@ -666,8 +666,9 @@
 			<result name="failed">/index.jsp</result>
 		</action>
 		<action name="showApplyList" class="MaterialAction" method="showApplyList">
-			<result name="success">/pages/material/material_apply.jsp</result>
-			<result name="failed">/index.jsp</result>
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+			</result>
 		</action>
 		<action name="showApplySelect" class="MaterialAction" method="showApplySelect">
 			<result name="success" type="json">

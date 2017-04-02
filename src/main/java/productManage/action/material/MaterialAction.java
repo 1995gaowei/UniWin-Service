@@ -443,17 +443,22 @@ Material material = new Material();
 	}
 	
 	public String showApplyList(){
+		response.setHeader("Access-Control-Allow-Origin", "*"); 
 		System.out.println("enter showApplyList");
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(ApplyConstants.SEARCH_APPLY_PARAMS[0], this.materialApplyCode);
 		params.put(ApplyConstants.SEARCH_APPLY_PARAMS[1], this.materialApplyDate);
+		jsonMap = new HashMap<>();
 		try {
 			this.pageBean = materialservice.queryApply(this.rowsPerPage, this.page, params);
 		} catch (Exception e) {
 			e.printStackTrace();
 			this.pageBean=new PageBean();
-			return ERROR;
+			jsonMap.put("result", "failed");
+			return SUCCESS;
 		}
+		jsonMap.put("result", "success");
+		jsonMap.put("data", this.pageBean.getList());
 		return SUCCESS;
 	}
 	

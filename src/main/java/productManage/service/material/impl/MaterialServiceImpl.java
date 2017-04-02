@@ -193,6 +193,7 @@ public class MaterialServiceImpl implements MaterialService{
 			}
 		}
 			
+		hql += " order by apply.matrialApplyDate desc";
 		PageBean pageBean = pageservice.queryForPage(hql, pageSize, page);
 		return pageBean;
 	}

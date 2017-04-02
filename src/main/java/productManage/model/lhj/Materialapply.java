@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import productManage.model.User;
 import productManage.model.wjx.MaterialOutput;
 
@@ -107,7 +109,7 @@ public class Materialapply implements Serializable{
 		this.material = material;
 	}
 
-
+	@JSON(serialize=false)
 	public Set<MaterialOutput> getMaterialOutputs() {
 		return materialOutputs;
 	}

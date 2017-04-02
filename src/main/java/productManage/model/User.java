@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import productManage.model.cs.OutSource;
 import productManage.model.cs.Receive;
 import productManage.model.lhj.Materialapply;
@@ -265,6 +267,7 @@ public class User implements Serializable{
 	 * 
 	 * @return 负责制版的裁剪单集合
 	 */
+	@JSON(serialize=false)
 	public Set<Tailor> getModelMadeTailors() {
 		return modelMadeTailors;
 	}
@@ -276,6 +279,7 @@ public class User implements Serializable{
 	 * 
 	 * @return 负责裁剪的裁剪单集合
 	 */
+	@JSON(serialize=false)
 	public Set<Tailor> getTailedTailors() {
 		return tailedTailors;
 	}
@@ -284,6 +288,7 @@ public class User implements Serializable{
 		this.tailedTailors = tailedTailors;
 	}
 
+	@JSON(serialize=false)
     public Set<MaterialInput> getMaterialInputs() {
         return materialInputs;
     }
@@ -292,6 +297,7 @@ public class User implements Serializable{
         this.materialInputs = materialInputs;
     }
 
+    @JSON(serialize=false)
     public Set<MaterialOutput> getMaterialOutputs() {
         return materialOutputs;
     }
@@ -301,6 +307,7 @@ public class User implements Serializable{
     }
 	
     //物料申请单集合-LHJ
+    @JSON(serialize=false)
 	public Set<Materialapply> getMaterialapplys() {
 		return materialapplys;
 	}
@@ -313,6 +320,7 @@ public class User implements Serializable{
 	 * 
 	 * @return 质检单集合
 	 */
+	@JSON(serialize=false)
 	public Set<Qc> getQcs() {
 		return qcs;
 	}
@@ -325,6 +333,7 @@ public class User implements Serializable{
 	 * 
 	 * @return 采购单 tyc
 	 */
+	@JSON(serialize=false)
 	public Set<Purchase> getPurchase() {
 		return purchase;
 	}
@@ -338,6 +347,7 @@ public class User implements Serializable{
 	 * @return (负责人的)客户订单
 	 */
 
+	@JSON(serialize=false)
 	public Set<Orders> getOrdersCharge() {
 		return ordersCharge;
 	}
@@ -351,6 +361,7 @@ public class User implements Serializable{
 	 * @return (制单人的)客户订单
 	 */
 	
+	@JSON(serialize=false)
 	public Set<Orders> getOrdersMaker() {
 		return ordersMaker;
 	}
@@ -362,6 +373,7 @@ public class User implements Serializable{
 	/** 
 	 * @return 外发单 cs
 	 */
+	@JSON(serialize=false)
 	public Set<OutSource> getOutsources() {
 		return outsources;
 	}
@@ -373,6 +385,7 @@ public class User implements Serializable{
 	/** 
 	 * @return 收货单 cs
 	 */
+	@JSON(serialize=false)
 	public Set<Receive> getReceives() {
 		return receives;
 	}
@@ -384,12 +397,15 @@ public class User implements Serializable{
 	/** 
 	 * @return 款式工艺单 tms
 	 */
+	@JSON(serialize=false)
     public Set<Technique> getTechniques() {
 		return techniques;
 	}
 	public void setTechniques(Set<Technique> techniques) {
 		this.techniques = techniques;
 	}
+	
+	@JSON(serialize=false)
 	public Set<Supplement> getSupplements() {
 		return supplements;
 	}
