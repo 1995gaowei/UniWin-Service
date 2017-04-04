@@ -70,6 +70,7 @@ public class BomAction extends PageAction{
 	}
 
 	public String showDesignList(){
+		response.setHeader("Access-Control-Allow-Origin", "*"); 
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(TechniqueConstants.SEARCH_TECHNIQUE_PARAMS[0],designCode);
 		params.put(TechniqueConstants.SEARCH_TECHNIQUE_PARAMS[1], putawayDate);
