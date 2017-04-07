@@ -2,7 +2,9 @@ package productManage.action.warehouse;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.json.JSONArray;
@@ -411,27 +413,57 @@ public class MaterialInAction extends PageAction{
 		
 	}
 	
+	Map<String,Object> jsonMap;
 	
+	
+	
+	
+	public Map<String, Object> getJsonMap() {
+		return jsonMap;
+	}
+
+	public void setJsonMap(Map<String, Object> jsonMap) {
+		this.jsonMap = jsonMap;
+	}
+
 	public String materialInManage(){
-		if (request.getSession().getAttribute("account")!=null){
-		System.out.println("enter materialInManage");
-    	Calendar calendar = Calendar.getInstance();
-    	System.out.println(getDate());
-    	if(getDate().equals("")||getDate() == null){
+		response.setHeader("Access-Control-Allow-Origin", "*"); 
+		Calendar calendar = Calendar.getInstance();
+		if(getDate().equals("")||getDate() == null){
     		calendar = null;
     	}else{
     		//时间用-分割
     		String[] dates = getDate().split("-");
     		calendar.set(Integer.parseInt(dates[0]), Integer.parseInt(dates[1])-1, Integer.parseInt(dates[2]));
     	}
-    	this.pageBean = warehouseservice.getMaterialInputList(calendar, this.page, this.rowsPerPage);
-    	setDate("");
-
-		return "success";
-		}
-		else{
-			return "failed";
-		}
+		this.pageBean = warehouseservice.getMaterialInputList(calendar, this.page, this.rowsPerPage);
+		
+		setDate("");
+		List list = pageBean.getList();
+		jsonMap = new HashMap<>();
+		jsonMap.put("result", "success");
+		jsonMap.put("data", list);
+		return SUCCESS;
+		
+//		if (request.getSession().getAttribute("account")!=null){
+//		System.out.println("enter materialInManage");
+//    	Calendar calendar = Calendar.getInstance();
+//    	System.out.println(getDate());
+//    	if(getDate().equals("")||getDate() == null){
+//    		calendar = null;
+//    	}else{
+//    		//时间用-分割
+//    		String[] dates = getDate().split("-");
+//    		calendar.set(Integer.parseInt(dates[0]), Integer.parseInt(dates[1])-1, Integer.parseInt(dates[2]));
+//    	}
+//    	this.pageBean = warehouseservice.getMaterialInputList(calendar, this.page, this.rowsPerPage);
+//    	
+//
+//		return "success";
+//		}
+//		else{
+//			return "failed";
+//		}
 	}
 	
 	public String materialInDetail(){
