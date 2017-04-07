@@ -181,7 +181,8 @@ public class WarehouseManagerServiceImpl implements WarehouseManagerService {
 		if (calendar == null) {
 //第二次修改	String hql = "select date_format(m.materialOutputDate,'%Y-%m-%d') as materialOutputDate,sum(m.materialOutputVol) as total from MaterialOutput as m group by materialOutputDate";
 			/////////////////////第二次修改003/////////////////////////////////////////
-			String hql = "select date_format(m.materialOutputDate,'%Y-%m-%d') as materialOutputDate,sum(m.materialOutputVol) as total ,m.user.userId from MaterialOutput as m group by materialOutputDate,user.userId";
+//			String hql = "select date_format(m.materialOutputDate,'%Y-%m-%d') as materialOutputDate,sum(m.materialOutputVol) as total ,m.user.userId from MaterialOutput as m group by materialOutputDate,user.userId";
+			String hql = "from MaterialOutput";
 			//////////////////////第二次修改003//////////////////////////////////////
 			PageBean result = pageService.queryForPage(hql, rowsPerPage, page);
 			return result;
@@ -191,8 +192,9 @@ public class WarehouseManagerServiceImpl implements WarehouseManagerService {
 //第二次修改	String hql = "select date_format(m.materialOutputDate,'%Y-%m-%d') as materialOutputDate,sum(m.materialOutputVol) as total from MaterialOutput as m group by materialOutputDate having materialOutputDate = '"
 //第二次修改						+ date + "'";
 			///////////////////////第二次修改004////////////////////////////////
-			String hql = "select date_format(m.materialOutputDate,'%Y-%m-%d') as materialOutputDate,sum(m.materialOutputVol) as total ,m.user.userId  from MaterialOutput as m group by materialOutputDate,user.userId  having materialOutputDate = '"
-					+ date + "'";
+//			String hql = "select date_format(m.materialOutputDate,'%Y-%m-%d') as materialOutputDate,sum(m.materialOutputVol) as total ,m.user.userId  from MaterialOutput as m group by materialOutputDate,user.userId  having materialOutputDate = '"
+//					+ date + "'";
+			String hql = "from MaterialOutput";
 			////////////////////////第二次修改004////////////////////////////
 			System.out.println(hql);
 			PageBean result = pageService.queryForPage(hql, rowsPerPage, page);
