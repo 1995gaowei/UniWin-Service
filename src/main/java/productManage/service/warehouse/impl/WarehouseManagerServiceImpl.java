@@ -92,7 +92,7 @@ public class WarehouseManagerServiceImpl implements WarehouseManagerService {
 		if(calendar == null){
 //第二次修改处//String hql = "select date_format(m.materialInputDate,'%Y-%m-%d') as materialInputDate,sum(m.materialInputVol)  as total from MaterialInput as m group by materialInputDate";
 			//第二次修改处001///////////////////////
-			String hql = "select * from MaterialInput";
+			String hql = "from MaterialInput";
 			//第二次修改处001///////////////////////
 			PageBean result = pageService.queryForPage(hql, rowsPerPage, page);
 			return result;
@@ -101,7 +101,7 @@ public class WarehouseManagerServiceImpl implements WarehouseManagerService {
 			String date = sdp.format(calendar.getTimeInMillis());
 //第二次修改处//String hql = "select date_format(m.materialInputDate,'%Y-%m-%d') as materialInputDate,sum(m.materialInputVol) as total from MaterialInput as m group by materialInputDate having materialInputDate = '"+date+"'";
 			//第二次修改处002///////////////////////
-			String hql = "select * from MaterialInput";
+			String hql = "from MaterialInput";
 			//第二次修改处002///////////////////////
 			System.out.println(hql);
 			PageBean result = pageService.queryForPage(hql, rowsPerPage, page);
