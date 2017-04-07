@@ -95,8 +95,12 @@
     
     <package name="warehouse" namespace="/Warehouse" extends = "struts-default,json-default">
         <action name = "materialOut_*" class="MaterialOutAction" method = "{1}">
-            <result name="showAllStores">/pages/warehouse/materialOut/showAllStores.jsp</result>
-            <result name="showMaterialOutputs">/pages/warehouse/materialOut/materialOutManage.jsp</result>
+            <result name="showAllStores" type="json">
+            	<param name="root">jsonMap</param>
+            </result>
+            <result name="showMaterialOutputs" type="json">
+            	<param name="root">jsonMap</param>
+            </result>
             <result name="failed">/index.jsp</result>
             <result name="error">/pages/warehouse/public/error.jsp</result>
         </action>
