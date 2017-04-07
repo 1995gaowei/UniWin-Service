@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import productManage.model.User;
 
 @Entity
@@ -96,6 +98,7 @@ public class Receive implements Serializable{
 		this.processor = processor;
 	}
 
+	@JSON(serialize=false)
 	public Set<ReceiveDetail> getReceiveDetails() {
 		return receiveDetails;
 	}	

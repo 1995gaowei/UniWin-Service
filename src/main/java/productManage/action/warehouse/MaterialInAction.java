@@ -349,7 +349,6 @@ public class MaterialInAction extends PageAction{
 	}
 	
 	public String addInMaterial(){
-		if (request.getSession().getAttribute("account")!=null){
 		System.out.println("enter addInMaterial action");
 		System.out.println(materialCodeA);
 		MaterialInput mai=new MaterialInput();
@@ -378,10 +377,6 @@ public class MaterialInAction extends PageAction{
     	ms.setRemainVol(ms.getRemainVol()+materialInputVol);
     	warehouseservice.updateStore(ms);
 		return "success";
-		}
-		else{
-			return "failed";
-		}
 	}
 	public List<MaterialAndVendor> materialConversion(List<Material> material){
 		List<MaterialAndVendor> result=new ArrayList<MaterialAndVendor>();

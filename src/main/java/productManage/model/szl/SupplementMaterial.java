@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import productManage.model.lhj.Supply;
 import productManage.model.wjx.MaterialInput;
 
@@ -96,6 +98,7 @@ public class SupplementMaterial implements Serializable{
 			this.supply = supply;
 		}
 
+		@JSON(serialize=false)
 		public Set<MaterialInput> getMaterialInputs() {
 			return materialInputs;
 		}

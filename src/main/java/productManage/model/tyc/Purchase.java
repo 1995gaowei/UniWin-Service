@@ -18,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import productManage.model.User;
 import productManage.model.lhj.Vendor;
 import productManage.model.wjx.MaterialInput;
@@ -41,6 +43,7 @@ public class Purchase implements Serializable{
 	@JoinColumn(name="userId")
 	private User user;//负责人，多对一
 	
+	@JSON(serialize=false)
 	public Set<Vendor> getVendors() {
 		return vendors;
 	}
@@ -206,6 +209,7 @@ public class Purchase implements Serializable{
 		this.purchaseState = purchaseState;
 	}
 
+	@JSON(serialize=false)
     public Set<MaterialInput> getMaterialInputs() {
         return materialInputs;
     }

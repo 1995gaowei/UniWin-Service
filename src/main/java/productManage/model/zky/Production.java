@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import productManage.model.cs.OutSource;
 import productManage.model.szl.Supplement;
 import productManage.model.tyc.Purchase;
@@ -168,6 +170,7 @@ public class Production implements Serializable {
 	 * 
 	 * @return 裁剪单列表
 	 */
+	@JSON(serialize=false)
 	public Set<Tailor> getTailors() {
 		return tailors;
 	}
@@ -179,6 +182,7 @@ public class Production implements Serializable {
 	 * 注意：按照现阶段设计，订单仍与生产单位1对1关系
 	 * @return 订单列表
 	 */
+	@JSON(serialize=false)
 	public Set<Orders> getOrders() {
 		return orders;
 	}
@@ -190,6 +194,7 @@ public class Production implements Serializable {
 	 * 
 	 * @return 外发单列表
 	 */
+	@JSON(serialize=false)
 	public Set<OutSource> getOutsources() {
 		return outsources;
 	}
@@ -201,6 +206,7 @@ public class Production implements Serializable {
 	 * 
 	 * @return QC质检单列表
 	 */
+	@JSON(serialize=false)
 	public Set<Qc> getQcs() {
 		return qcs;
 	}
@@ -212,6 +218,7 @@ public class Production implements Serializable {
 	 * 
 	 * @return 采购单 tyc
 	 */
+	@JSON(serialize=false)
 	public Set<Purchase> getPurchase() {
 		return purchase;
 	}

@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import productManage.model.tms.Design;
 import productManage.model.yk.Orders;
 
@@ -91,6 +93,7 @@ public class Sample implements Serializable{
 		this.sampleState = sampleState;
 	}
 
+	@JSON(serialize=false)
 	public Set<SampleStorageDetail> getSample_details() {
 		return sample_details;
 	}

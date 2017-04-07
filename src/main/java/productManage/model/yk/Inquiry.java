@@ -20,6 +20,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import productManage.model.tms.Design;
 
 @Entity
@@ -227,6 +229,7 @@ public class Inquiry implements Serializable{
 		this.inquiryDetail = inquiryDetail;
 	}
 	
+	@JSON(serialize=false)
 	public Set<InquiryMaterial> getInquiryMaterials() {
 		return inquiryMaterials;
 	}

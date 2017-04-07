@@ -79,25 +79,19 @@ public class BomAction extends PageAction{
         jsonMap = new HashMap<>();
 		try {
 			this.pageBean = bomservice.queryDesign(this.rowsPerPage, this.page, params);
-			List<Design> list = this.pageBean.getList();		
-			for(int i=0;i<list.size();i++){
-				String url = list.get(i).getDesignPicURL();
-				if(url.length()>12) {list.get(i).setDesignPicURL("../images/1.png");}
-			}
 			
 			/*this.pageBean = bomservice.queryDesign(this.rowsPerPage, this.page, params,0);
 			List<Design> list2 = this.pageBean.getList();
 			
 			this.pageBean.setList(list1);*/
-			this.pageBean.setList(list);
-			jsonMap.put("result", "success");
-			jsonMap.put("data", list);
 		} catch (Exception e) {
 			e.printStackTrace();
 			this.pageBean=new PageBean();
 			jsonMap.put("result", "failed");
-			return ERROR;
+			return SUCCESS;
 		}
+		jsonMap.put("result", "success");
+		jsonMap.put("data", this.pageBean.getList());
 		return SUCCESS;
 	}
 
@@ -214,6 +208,7 @@ public class BomAction extends PageAction{
 	}
 	
 	public String addDesign(){
+		response.setHeader("Access-Control-Allow-Origin", "*"); 
 		Design design = new Design();
 		
 		String designCode = request.getParameter("designCode");
@@ -250,12 +245,12 @@ public class BomAction extends PageAction{
 		design.setDesignType(designType);
 		design.setDesignFlagShipURL(designFlagShipURL);
 		design.setDesignComment(designComment);
-		try {
-			upload();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			upload();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		design.setDesignPicURL(designPicURL);
 		
 		System.out.println(designPicURL);

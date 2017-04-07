@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import productManage.model.tms.Technique;
 import productManage.model.yk.Orders;
 
@@ -66,7 +68,7 @@ public class Customer implements Serializable{
 		this.orders = orders;
 	}
 
-
+	@JSON(serialize=false)
 	public Set<Orders> getOrders() {
 		return orders;
 	}

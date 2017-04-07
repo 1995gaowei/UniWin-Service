@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import productManage.model.User;
 import productManage.model.lhj.Supply;
 import productManage.model.zky.Production;
@@ -137,6 +139,7 @@ public class Supplement implements Serializable{
     	this.supplementComment=supplementComment;
     }
 
+    @JSON(serialize=false)
 	public Set<SupplementMaterial> getSupplementMaterials() {
 		return supplementMaterials;
 	}

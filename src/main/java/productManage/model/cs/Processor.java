@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import productManage.model.tms.Technique;
 
 @Entity
@@ -174,6 +176,7 @@ public class Processor implements Serializable {
 		this.processorComment = processorComment;
 	}
 
+	@JSON(serialize=false)
 	public Set<OutSource> getOutSources() {
 		return outSources;
 	}
@@ -194,6 +197,7 @@ public class Processor implements Serializable {
 		this.outSources.remove(os);
 	}
 
+	@JSON(serialize=false)
 	public Set<Receive> getReceives() {
 		return receives;
 	}

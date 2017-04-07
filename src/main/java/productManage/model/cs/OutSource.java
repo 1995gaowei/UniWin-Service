@@ -16,6 +16,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import productManage.model.User;
 import productManage.model.tms.Design;
 import productManage.model.tms.Technique;
@@ -190,6 +192,7 @@ public class OutSource implements Serializable{
 		this.user = user;
 	}
 
+	@JSON(serialize=false)
 	public Set<OutSourceDetail> getOutSourceDetails() {
 		return outSourceDetails;
 	}
@@ -210,6 +213,7 @@ public class OutSource implements Serializable{
 		this.outSourceDetails.remove(os);
 	}
 
+	@JSON(serialize=false)
 	public Set<Receive> getReceives() {
 		return receives;
 	}

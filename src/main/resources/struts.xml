@@ -760,9 +760,9 @@
 			<result name="failed">/index.jsp</result>
 		</action>
 		<action name="addDesign" class="BomAction" method="addDesign">
-			<result name="success" type="redirect">/Bom/showAddDesign</result>
-			<result name="error">/error.jsp</result>
-			<result name="failed">/index.jsp</result>
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+			</result>
 		</action>
 		<action name="quitDesign" class="BomAction" method="quitDesign">
 			<result name="success" type="redirect">/Bom/showDesignList</result>
