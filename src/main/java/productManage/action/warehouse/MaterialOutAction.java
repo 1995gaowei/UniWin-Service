@@ -138,42 +138,29 @@ public class MaterialOutAction extends PageAction{
     }
     
     public String doMaterialOut(){
-    	if (request.getSession().getAttribute("account")!=null){
+    	response.setHeader("Access-Control-Allow-Origin", "*"); 
+    		Store store = warehouseService.getStore(request.getParameter("materialCode"), Integer.parseInt(request.getParameter("warehouseId")));
     		
-    		Store store = warehouseService.getStore(materialCode, warehouseId);
-    		if(outVol>store.getRemainVol()){
-    			System.out.println("出库数大于现有量");
-    			setErrorMessage("抱歉，您的出库数量大于库存数量");
-    			return "error";
-    		}
     		//出库操作1：新建出库单
     		MaterialOutput moNew = new MaterialOutput();
-    		Materialapply map = warehouseService.getMaterialApplyByCode(materialApplyCode);
-    		moNew.setMaterialApply(map);
+    		moNew.setMaterialApply(null);
     		moNew.setMaterial(store.getMaterial());
-    		moNew.setMaterialOutputComment(comment);
+    		moNew.setMaterialOutputComment(request.getParameter("comment"));
     		Calendar now = Calendar.getInstance();
     		now.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH),now.get(Calendar.DATE));
     		moNew.setMaterialOutputDate(new java.sql.Date(now.getTimeInMillis()));
-    		moNew.setMaterialOutputVol(outVol);
-    		User user = userService.getUserByAccount((String)request.getSession().getAttribute("account"));
+    		moNew.setMaterialOutputVol(Integer.parseInt(request.getParameter("materialOutputVol")));
+    		User user = userService.getUserByAccount(request.getParameter("account"));
     		moNew.setUser(user);
     		moNew.setWarehouse(store.getWarehouse());
     		warehouseService.addMaterialOutput(moNew);
     		//出库操作2：修改store的物料剩余量
-    		store.setRemainVol(store.getRemainVol()-outVol);
+    		store.setRemainVol(store.getRemainVol()-Integer.parseInt(request.getParameter("materialOutputVol")));
     		warehouseService.updateStore(store);
-    		//出仓操作处理后初始化界面
-    		try {
-				response.sendRedirect(request.getContextPath()+"/"+"Warehouse/materialOut_showAllStores");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    		return "showAllStores";
-    	}else{
-    		return "failed";
-    	}
+    		jsonMap = new HashMap<>();
+    		jsonMap.put("result", "success");
+    		return "success";
+    	
     }
     
     public String showMaterialOutputs(){

@@ -351,18 +351,17 @@ public class MaterialInAction extends PageAction{
 	}
 	
 	public String addInMaterial(){
-		System.out.println("enter addInMaterial action");
-		System.out.println(materialCodeA);
+		response.setHeader("Access-Control-Allow-Origin", "*"); 
 		MaterialInput mai=new MaterialInput();
-		User user = userService.getUserByAccount((String)request.getSession().getAttribute("account"));
+		User user = userService.getUserByAccount(request.getParameter("account"));
 		mai.setUser(user);
-		mai.setMaterialInputComment(null);
-		mai.setMaterialInputVol(materialInputVol);
-		Material m=materialservice.getMaterialByCode(materialCodeA);
+		mai.setMaterialInputComment(request.getParameter("comment"));
+		mai.setMaterialInputVol(Integer.parseInt(request.getParameter("materialInputVol")));
+		Material m=materialservice.getMaterialByCode(request.getParameter("materialCode"));
 		Set<Store> store=m.getStores();
 		Store ms=null;
 		for(Store s:store){
-			if(s.getWarehouse().getLocation().equals(location)){
+			if(s.getWarehouse().getLocation().equals(request.getParameter("location"))){
 				mai.setWarehouse(s.getWarehouse());
 				ms=s;
 			}
@@ -376,10 +375,13 @@ public class MaterialInAction extends PageAction{
     	
     	warehouseservice.addMaterialInput(mai);
     	
-    	ms.setRemainVol(ms.getRemainVol()+materialInputVol);
+    	ms.setRemainVol(ms.getRemainVol()+Integer.parseInt(request.getParameter("materialInputVol")));
     	warehouseservice.updateStore(ms);
+    	jsonMap = new HashMap<>();
+    	jsonMap.put("result", "success");
 		return "success";
 	}
+	
 	public List<MaterialAndVendor> materialConversion(List<Material> material){
 		List<MaterialAndVendor> result=new ArrayList<MaterialAndVendor>();
 		for(Material m:material){

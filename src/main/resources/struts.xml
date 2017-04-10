@@ -113,8 +113,14 @@
         	<result name="failed">/index.jsp</result>
         </action>
         <action name="addInMaterial" class="MaterialInAction" method="addInMaterial">
-        	<result name="success">/pages/warehouse/materialIn/materialInput.jsp</result>
-        	<result name="failed">/index.jsp</result>
+        	<result name="success" type="json">
+        		<param name="root">jsonMap</param>
+        	</result>
+        </action>
+        <action name="doMaterialOut" class="MaterialOutAction" method="doMaterialOut">
+        	<result name="success" type="json">
+        		<param name="root">jsonMap</param>
+        	</result>
         </action>
         <action name="materialInManage" class="MaterialInAction" method="materialInManage">
         	<result name="success" type="json">
