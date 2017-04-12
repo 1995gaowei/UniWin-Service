@@ -68,6 +68,14 @@ public class BomAction extends PageAction{
 	public void setJsonMap(Map<String, Object> jsonMap) {
 		this.jsonMap = jsonMap;
 	}
+	
+	public String getAllDesign() {
+		List<Design> designList = bomservice.getAllDesign();
+		jsonMap = new HashMap<>();
+		jsonMap.put("result", "success");
+		jsonMap.put("data", designList);
+		return SUCCESS;
+	}
 
 	public String showDesignList(){
 		response.setHeader("Access-Control-Allow-Origin", "*"); 
@@ -119,14 +127,6 @@ public class BomAction extends PageAction{
 	public String getBom(){
 		this.design = bomservice.getDesignById(request.getParameter("designId"));
 		
-		String procedure = design.getDesignTechProcedure();
-		procedure = procedure.replaceAll(">", "&gt;");
-		System.out.println(procedure);
-		design.setDesignTechProcedure(procedure);
-		if(design.getDesignPicURL().length()>12){
-			design.setDesignPicURL("../images/1.png");
-		}
-		
 		List materialMes = new ArrayList();
 		
 		Iterator<Bom> materialItr = design.getBoms().iterator();	
@@ -146,11 +146,17 @@ public class BomAction extends PageAction{
 			
 			System.out.println(bom.getMaterial().getMaterialCode());
 		}
+		
 
 		this.materialMes = materialMes;
+		
+		Map<String, Object> data = new HashMap<>();
+		data.put("design", design);
+		data.put("bom", materialMes);
+		
 		jsonMap = new HashMap<>();
 		jsonMap.put("result", "success");
-		jsonMap.put("data", materialMes);
+		jsonMap.put("data", data);
 		return SUCCESS;
 	}
 
@@ -183,19 +189,21 @@ public class BomAction extends PageAction{
 	}
 	
 	public String addBom(){
-		Material m = materialservice.getMaterialByCode(materialCode);
-		Design d = designservice.getByCode(designCode);
-		float vol = Float.parseFloat(volPerDesign);
+		Material m = materialservice.getMaterialByCode(request.getParameter("materialCode"));
+		Design d = designservice.getByCode(request.getParameter("designCode"));
+		float vol = Float.parseFloat(request.getParameter("volPerDesign"));
 		
-		Bom bom = new Bom(d,m,vol,materialPosition);
+		Bom bom = new Bom(d,m,vol,request.getParameter("materialPosition"));
 		
 		bomservice.addBom(bom);
+		jsonMap = new HashMap<>();
+		jsonMap.put("result", "success");
 		return SUCCESS;
 	}
 	
 	public String deleteBom(){
-		Material m = materialservice.getMaterialByCode(materialCode);
-		Design d = designservice.getByCode(designCode);
+		Material m = materialservice.getMaterialByCode(request.getParameter("materialCode"));
+		Design d = designservice.getByCode(request.getParameter("designCode"));
 		
 		bomservice.deleteBom(m, d);
 		jsonMap = new HashMap<>();

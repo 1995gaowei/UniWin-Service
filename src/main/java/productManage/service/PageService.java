@@ -1,5 +1,7 @@
 package productManage.service;
 
+import java.util.List;
+
 import productManage.vo.PageBean;
 
 public interface PageService {
@@ -11,6 +13,8 @@ public interface PageService {
 	 * @return 包含结果列表以及页面相关控制参数的组件
 	 */
 	public PageBean queryForPage(String hql,int pageSize,int currentPage);
+
+	List query(String hql);
 	
 	
 }

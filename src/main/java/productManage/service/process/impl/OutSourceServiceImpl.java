@@ -64,8 +64,6 @@ public class OutSourceServiceImpl implements OutSourceService {
 		Processor pr = processorDao.getProcessorById(os.getProcessor().getProcessorCode());
 		os.setProcessor(pr);
 
-		User user = userDao.getUserByAccount(os.getUser().getUserName());
-		os.setUser(user);
 
 		OutSource o = new OutSource();
 		o = os;

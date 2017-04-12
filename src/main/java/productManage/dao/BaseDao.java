@@ -48,4 +48,6 @@ public interface BaseDao {
 	 */
 	public int getAllRowCount(String hql);
 
+	List query(String hql);
+
 }

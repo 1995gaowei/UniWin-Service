@@ -1,6 +1,7 @@
 package productManage.action.process;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,24 @@ public class ProcessorAction extends PageAction{
 			return ERROR;
 		}
 		return "success";
+	}
+	
+	private Map<String, Object> jsonMap;
+	
+	public Map<String, Object> getJsonMap() {
+		return jsonMap;
+	}
+
+	public void setJsonMap(Map<String, Object> jsonMap) {
+		this.jsonMap = jsonMap;
+	}
+
+	public String getAllProcessor () {
+		List<Processor> list = processorService.getAllProcesser();
+		jsonMap = new HashMap<>();
+		jsonMap.put("result", "success");
+		jsonMap.put("data", list);
+		return SUCCESS;
 	}
 	
 	

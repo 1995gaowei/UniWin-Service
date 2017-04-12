@@ -74,12 +74,9 @@ public class WarehouseManagerServiceImpl implements WarehouseManagerService {
 //	}
 	
     @Override
-    public List<MaterialInput> getMaterialInputList(
-            Calendar date) {
-		java.sql.Date dateSql = new java.sql.Date(date.getTime().getTime());
-		System.out.println("2:"+dateSql.toString());
-		return materialInputDao.getMaterialInputByDate(dateSql);
-
+    public List<MaterialInput> getMaterialInputList() {
+		List<MaterialInput> list = pageService.query("from MaterialInput as mi order by materialInputDate desc");
+		return list;
 	}
 
 	@Override
@@ -87,29 +84,6 @@ public class WarehouseManagerServiceImpl implements WarehouseManagerService {
 		return 0;
 	}
 	
-    @Override
-    public PageBean getMaterialInputList(Calendar calendar,int page,int rowsPerPage) {
-		if(calendar == null){
-//第二次修改处//String hql = "select date_format(m.materialInputDate,'%Y-%m-%d') as materialInputDate,sum(m.materialInputVol)  as total from MaterialInput as m group by materialInputDate";
-			//第二次修改处001///////////////////////
-			String hql = "from MaterialInput";
-			//第二次修改处001///////////////////////
-			PageBean result = pageService.queryForPage(hql, rowsPerPage, page);
-			return result;
-		}else{
-			SimpleDateFormat sdp = new SimpleDateFormat("yyyy-MM-dd");
-			String date = sdp.format(calendar.getTimeInMillis());
-//第二次修改处//String hql = "select date_format(m.materialInputDate,'%Y-%m-%d') as materialInputDate,sum(m.materialInputVol) as total from MaterialInput as m group by materialInputDate having materialInputDate = '"+date+"'";
-			//第二次修改处002///////////////////////
-			String hql = "from MaterialInput";
-			//第二次修改处002///////////////////////
-			System.out.println(hql);
-			PageBean result = pageService.queryForPage(hql, rowsPerPage, page);
-			System.out.println(result.getList());
-			return result;
-		}
-    }
-
 	@Override
 	public int MaterialOutput(Material material, int number) {
 		// TODO Auto-generated method stub
@@ -176,31 +150,9 @@ public class WarehouseManagerServiceImpl implements WarehouseManagerService {
 	}
 
 	@Override
-	public PageBean getMaterialOutputList(Calendar calendar, int page,
-			int rowsPerPage) {
-		if (calendar == null) {
-//第二次修改	String hql = "select date_format(m.materialOutputDate,'%Y-%m-%d') as materialOutputDate,sum(m.materialOutputVol) as total from MaterialOutput as m group by materialOutputDate";
-			/////////////////////第二次修改003/////////////////////////////////////////
-//			String hql = "select date_format(m.materialOutputDate,'%Y-%m-%d') as materialOutputDate,sum(m.materialOutputVol) as total ,m.user.userId from MaterialOutput as m group by materialOutputDate,user.userId";
-			String hql = "from MaterialOutput";
-			//////////////////////第二次修改003//////////////////////////////////////
-			PageBean result = pageService.queryForPage(hql, rowsPerPage, page);
-			return result;
-		} else {
-			SimpleDateFormat sdp = new SimpleDateFormat("yyyy-MM-dd");
-			String date = sdp.format(calendar.getTimeInMillis());
-//第二次修改	String hql = "select date_format(m.materialOutputDate,'%Y-%m-%d') as materialOutputDate,sum(m.materialOutputVol) as total from MaterialOutput as m group by materialOutputDate having materialOutputDate = '"
-//第二次修改						+ date + "'";
-			///////////////////////第二次修改004////////////////////////////////
-//			String hql = "select date_format(m.materialOutputDate,'%Y-%m-%d') as materialOutputDate,sum(m.materialOutputVol) as total ,m.user.userId  from MaterialOutput as m group by materialOutputDate,user.userId  having materialOutputDate = '"
-//					+ date + "'";
-			String hql = "from MaterialOutput";
-			////////////////////////第二次修改004////////////////////////////
-			System.out.println(hql);
-			PageBean result = pageService.queryForPage(hql, rowsPerPage, page);
-			System.out.println(result.getList());
-			return result;
-		}
+	public List<MaterialOutput> getMaterialOutputList() {
+		List<MaterialOutput> list = pageService.query("from MaterialOutput mo order by MaterialOutputDate desc");
+		return list;
 	}
 
 	@Override
@@ -245,7 +197,8 @@ public class WarehouseManagerServiceImpl implements WarehouseManagerService {
 
 	@Override
 	public List<Store> getAllStore(){
-		return storeDao.getAllStoreInfos();
+		List<Store> list = pageService.query("from Store order by materialCode desc");
+		return list;
 	}
 	
 	@Override

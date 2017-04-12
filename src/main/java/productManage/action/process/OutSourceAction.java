@@ -15,6 +15,9 @@ import productManage.model.cs.Processor;
 import productManage.model.tms.Design;
 import productManage.model.zky.Production;
 import productManage.service.process.OutSourceService;
+import productManage.service.process.ProcessorService;
+import productManage.service.system.UserService;
+import productManage.service.technique.DesignService;
 import productManage.util.DateFormat;
 import productManage.vo.PageBean;
 import productManage.vo.process.OutSourceVO;
@@ -29,7 +32,20 @@ public class OutSourceAction extends PageAction{
 
 	@Autowired
 	private OutSourceService outSourceService;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private DesignService designService;
 	
+	private Map<String, Object> jsonMap;
+	public Map<String, Object> getJsonMap() {
+		return jsonMap;
+	}
+
+	public void setJsonMap(Map<String, Object> jsonMap) {
+		this.jsonMap = jsonMap;
+	}
+
 	/**
 	 * 新增外发单
 	 */
@@ -43,12 +59,11 @@ public class OutSourceAction extends PageAction{
 		p.setProductionCode(request.getParameter("productionCode"));
         os.setProduction(p);
         
-        Design d = new Design();
-        d.setDesignCode(request.getParameter("designCode"));
+        Design d = designService.getByCode(request.getParameter("designCode"));
         os.setDesign(d);
         
         os.setFinishDate(DateFormat.StringToDate(request.getParameter("finishDate")));
-        os.setOsScheduleDate(DateFormat.StringToDate(request.getParameter("osScheduleDate")));
+        os.setOsScheduleDate(DateFormat.StringToDate(request.getParameter("actualOutDate")));
         os.setOutsourceState(request.getParameter("outSourceState"));
         os.setLabourCost(Integer.parseInt(request.getParameter("labourCost")));
         
@@ -58,20 +73,28 @@ public class OutSourceAction extends PageAction{
         
         os.setActualOutDate(DateFormat.StringToDate(request.getParameter("actualOutDate")));
 
-        User user = new User();
-        user.setUserName(request.getParameter("userName"));
+        User user = userService.getUserByAccount(request.getParameter("userAccount"));
         os.setUser(user);
         
         OutSource o = outSourceService.addOutSource(os);
-        details_add.remove(details_add.size()-1);
-        System.out.println(details_add.size());
-        if(o!=null){
-        	outSourceService.addOutSourceDetail(o, details_add);
-        	return "success";
-        }else{
-        	return "fail";
-        }
-		
+        
+        List<OutSourceDetail> list = new ArrayList<>();
+        OutSourceDetail outSourceDetail = new OutSourceDetail();
+        outSourceDetail.setOutsource(o);
+        outSourceDetail.setOutsourceXS(Integer.parseInt(request.getParameter("xs")));
+        outSourceDetail.setOutsourceS(Integer.parseInt(request.getParameter("s")));
+        outSourceDetail.setOutsourceM(Integer.parseInt(request.getParameter("m")));
+        outSourceDetail.setOutsourceL(Integer.parseInt(request.getParameter("l")));
+        outSourceDetail.setOutsourceXL(Integer.parseInt(request.getParameter("xl")));
+        outSourceDetail.setOutsourceXXL(Integer.parseInt(request.getParameter("xxl")));
+        outSourceDetail.setOutsourceTotal(Integer.parseInt(request.getParameter("total")));
+        list.add(outSourceDetail);
+        
+        outSourceService.addOutSourceDetail(o, list);
+        
+        jsonMap = new HashMap<>();
+        jsonMap.put("result", "success");
+		return SUCCESS;
 	}
 
 	public List<OutSourceDetail> getDetails_add() {

@@ -41,10 +41,29 @@ public class ShowUserAction extends PageAction{
 	private List<UserVO> userList;
 	private List<DepartmentVO> departmentList;
 	
+	private Map<String, Object> jsonMap;
+	
+	public Map<String, Object> getJsonMap() {
+		return jsonMap;
+	}
+
+	public void setJsonMap(Map<String, Object> jsonMap) {
+		this.jsonMap = jsonMap;
+	}
+
+
 	/*
 	 * user ajax json返回结果userJson
 	 */
 	private String userJson;
+	
+	public String getAllUser() {
+		List<User> list = userService.findAll();
+		jsonMap = new HashMap<>();
+		jsonMap.put("result", "success");
+		jsonMap.put("data", list);
+		return SUCCESS;
+	}
 
 	public UserService getUserService() {
 		return userService;

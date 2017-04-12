@@ -429,92 +429,15 @@ public class MaterialInAction extends PageAction{
 	}
 
 	public String materialInManage(){
-		response.setHeader("Access-Control-Allow-Origin", "*"); 
-		Calendar calendar = Calendar.getInstance();
-		if(getDate().equals("")||getDate() == null){
-    		calendar = null;
-    	}else{
-    		//时间用-分割
-    		String[] dates = getDate().split("-");
-    		calendar.set(Integer.parseInt(dates[0]), Integer.parseInt(dates[1])-1, Integer.parseInt(dates[2]));
-    	}
-		this.pageBean = warehouseservice.getMaterialInputList(calendar, this.page, this.rowsPerPage);
-		
-		setDate("");
-		List list = pageBean.getList();
+		List list = warehouseservice.getMaterialInputList();
 		jsonMap = new HashMap<>();
 		jsonMap.put("result", "success");
 		jsonMap.put("data", list);
 		return SUCCESS;
-		
-//		if (request.getSession().getAttribute("account")!=null){
-//		System.out.println("enter materialInManage");
-//    	Calendar calendar = Calendar.getInstance();
-//    	System.out.println(getDate());
-//    	if(getDate().equals("")||getDate() == null){
-//    		calendar = null;
-//    	}else{
-//    		//时间用-分割
-//    		String[] dates = getDate().split("-");
-//    		calendar.set(Integer.parseInt(dates[0]), Integer.parseInt(dates[1])-1, Integer.parseInt(dates[2]));
-//    	}
-//    	this.pageBean = warehouseservice.getMaterialInputList(calendar, this.page, this.rowsPerPage);
-//    	
-//
-//		return "success";
-//		}
-//		else{
-//			return "failed";
-//		}
 	}
 	
 	public String materialInDetail(){
-		if (request.getSession().getAttribute("account")!=null){
-		Calendar cal = Calendar.getInstance();
-    	String[] dates = getDateAjax().split("-");
-    	cal.set(Integer.parseInt(dates[0]), Integer.parseInt(dates[1])-1, Integer.parseInt(dates[2]));
-    	List<MaterialInput> results = warehouseservice.getMaterialInputList(cal);
-    	System.out.println("in action ajax0"+getDateAjax());
-    	JSONArray json = new JSONArray();
-    	try {
-	    	for(MaterialInput mo:results){
-	    		Material materialT = mo.getMaterial();
-	    		WareHouse warehouseT = mo.getWarehouse();
-	    		User userT = mo.getUser();
-	    		Store storeT = warehouseservice.getStore(mo.getMaterial().getMaterialCode(), mo.getWarehouse().getWarehouseid());
-	    		JSONObject jo = new JSONObject();
-	    		JSONObject material = new JSONObject();
-	    		JSONObject warehouse = new JSONObject();
-	    		JSONObject user = new JSONObject();
-	    		JSONObject store = new JSONObject();
-	    		jo.put("material", material);
-	    		jo.put("warehouse", warehouse);
-	    		jo.put("user", user);
-	    		jo.put("store", store);
-	    		material.put("materialName", materialT.getMaterialName());
-	    		material.put("materialCode", materialT.getMaterialCode());
-//	    		material.put("materialIngredient", materialT.getMaterialIngredient());
-//	    		material.put("unitPrice", materialT.getUnitPrice());
-//	    		material.put("materialType", materialT.getMaterialType());
-//	    		material.put("colorCode", materialT.getColorCode());
-//	    		material.put("colorDescription", materialT.getColorDescription());
-	    		warehouse.put("warehouseid", warehouseT.getWarehouseid());
-	    		warehouse.put("location", warehouseT.getLocation());
-	    		warehouse.put("remain", warehouseT.getRemain());
-	    		user.put("userName", userT.getUserName());
-	    		store.put("remainVol", storeT==null?"":storeT.getRemainVol());
-	    		jo.put("materialInputVol", mo.getMaterialInputVol());
-	    		json.put(jo);
-	    	}
-    	} catch (JSONException e) {
-    		e.printStackTrace();
-    	}
-    	setInputDateDetailAjax(json.toString());
-    	return SUCCESS;
-		}
-		else{
-			return "failed";
-		}
+		return SUCCESS;
 	}
 	
 	

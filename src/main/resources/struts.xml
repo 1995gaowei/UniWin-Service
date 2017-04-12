@@ -9,6 +9,11 @@
 
 
 	<package name="process" namespace="/Process" extends="struts-default,json-default">		
+		<action name="getAllProcessor" class="ProcessorAction" method="getAllProcessor">
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+			</result>
+		</action>
 		<action name="processorlist" class="ProcessorAction" method="showAllProcessorList">
 			<result name="success">/pages/process/processor_manage.jsp</result>
 		</action>
@@ -19,7 +24,9 @@
 			<result name="success" type="redirect">/Process/processorlist</result>
 		</action>
 		<action name="addOutSource" class="OutSourceAction" method="addOutSource">
-			<result name="success">/pages/process/outsource_new.jsp</result>
+			<result name="success" type="json">
+				<param name="root">jsonMap</param>
+			</result>
 		</action>
 		<action name="outsourcelist" class="OutSourceAction" method="showAllOutSourceList">
 			<result name="success">/pages/process/outsource_manage.jsp</result>
@@ -517,6 +524,12 @@
 	        <result name="failed">/index.jsp</result>
 		</action>
 		
+		<action name="getAllUser" class="ShowUserAction" method="getAllUser">
+			<result type="json">
+	            <param name="root">jsonMap</param>
+	        </result>
+		</action>
+		
 		<action name="addUser" class="ShowUserAction" method="add">
 			<result name="success" type="redirect">/System/manageUser</result>
 			<result name="failed">/index.jsp</result>
@@ -756,6 +769,11 @@
 				<param name="root">jsonMap</param>
 			</result>
 			<result name="error" type="json">
+				<param name="root">jsonMap</param>
+			</result>
+		</action>
+		<action name="getAllDesign" class="BomAction" method="getAllDesign">
+			<result name="success" type="json">
 				<param name="root">jsonMap</param>
 			</result>
 		</action>

@@ -23,21 +23,11 @@ public interface WarehouseManagerService {
     public List<Material> getMaterialOutList(String id,String ClouthStyleId,String MaterialName ,String preOrderId);//出库时获取的物料列表
     public int MaterialInput(Material material,int  number);//物料入库修改仓储信息
     public int MaterialOutput(Material material,int number);///物料出库修改仓储信息
-    public List<MaterialInput> getMaterialInputList(Calendar date);//根据时间获取入库单列表
     
-    public PageBean getMaterialInputList(Calendar calendar,int page,int rowsPerPage);//获取所有入库单
     
     
     public List<WareHouse> getTest();
     
-    /**
-     * 获取出库单列表（list中的值是：时间+该日出库总数的数组）
-     * @param date 根据时间筛选
-     * @param page
-     * @param rowsPerPage
-     * @return
-     */
-    public PageBean getMaterialOutputList(Calendar date,int page, int rowsPerPage);
     /**
      * 获取仓库物料对应信息
      */
@@ -109,4 +99,6 @@ public interface WarehouseManagerService {
     public WareHouse getWarehouseById(int id);
 	public Store getStore(String materialCode);
 	public PageBean queryMaterialByAll(int pageSize, int page, Map<String, Object> params);
+	public List<MaterialInput> getMaterialInputList();
+	public List<MaterialOutput> getMaterialOutputList();
 }

@@ -39,5 +39,10 @@ public class PageServiceImpl implements productManage.service.PageService {
 		pageBean.init();
 		return pageBean;
 	}
+	
+	@Override
+	public List query(String hql) {
+		return basedao.query(hql);
+	}
 
 }

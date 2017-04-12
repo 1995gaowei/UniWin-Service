@@ -1,6 +1,7 @@
 package productManage.service.material.impl;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,5 +125,13 @@ public class BomServiceImpl implements BomService{
 			
 		PageBean pageBean = pageservice.queryForPage(hql, pageSize, page);
 		return pageBean;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Design> getAllDesign() {
+		// TODO Auto-generated method stub
+		List<Design> list = pageservice.query("select design from Design as design order by designCode desc");
+		return list;
 	}
 }

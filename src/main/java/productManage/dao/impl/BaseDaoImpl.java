@@ -134,6 +134,13 @@ public class BaseDaoImpl implements BaseDao {
 			}
 		}
 	}
+	
+	@Override
+	public List query(String hql) {
+		Query query = getSession().createQuery(hql);
+		List list = query.list();
+		return list;
+	}
 
 	@Override
 	public List queryForPage(final String hql, final int offset, final int length) {

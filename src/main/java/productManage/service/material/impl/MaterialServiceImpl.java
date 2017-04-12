@@ -207,7 +207,7 @@ public class MaterialServiceImpl implements MaterialService{
 			hql += "where ";
 			hql += "material.materialName like '%" + materialName + "%' ";
 		}
-		
+		hql += " order by modificationDate desc";
 		List<Material> materialList = materialdao.getMaterialList(hql);
 		System.out.println(materialList.size());
 		return materialList;

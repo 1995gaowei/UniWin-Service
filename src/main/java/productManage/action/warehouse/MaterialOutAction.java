@@ -67,13 +67,7 @@ public class MaterialOutAction extends PageAction{
 	public String showAllStores(){
 		
 		response.setHeader("Access-Control-Allow-Origin", "*"); 
-		this.searchMaterialCode = null;
-		this.searchMaterialName = null;
-		this.searchDesignCode = null;
-		this.searchMaterialApplyCode = null;
-		pageBean = warehouseService.getAllOutStores(this.page, this.rowsPerPage);
-		List<Object[]> queryResults = pageBean.getList();
-		List<StoreAndApply> results = storeApplyConversion(queryResults);
+		List<Store> results = warehouseService.getAllStore();
 		jsonMap = new HashMap<>();
 		jsonMap.put("result", "success");
 		jsonMap.put("data", results);
@@ -164,41 +158,11 @@ public class MaterialOutAction extends PageAction{
     }
     
     public String showMaterialOutputs(){
-    	response.setHeader("Access-Control-Allow-Origin", "*"); 
-		Calendar calendar = Calendar.getInstance();
-		System.out.println(getDate());
-		if (getDate().equals("") || getDate() == null) {
-			calendar = null;
-		} else {
-			// 时间用-分割
-			String[] dates = getDate().split("-");
-			calendar.set(Integer.parseInt(dates[0]), Integer.parseInt(dates[1]) - 1, Integer.parseInt(dates[2]));
-		}
-		this.pageBean = warehouseService.getMaterialOutputList(calendar, this.page, this.rowsPerPage);
-		setDate("");
-		List list = pageBean.getList();
+		List<MaterialOutput> list = warehouseService.getMaterialOutputList();
 		jsonMap = new HashMap<>();
 		jsonMap.put("result", "success");
 		jsonMap.put("data", list);
 		return "showMaterialOutputs";
-    	
-//		if (request.getSession().getAttribute("account") != null) {
-//
-//			Calendar calendar = Calendar.getInstance();
-//			System.out.println(getDate());
-//			if (getDate().equals("") || getDate() == null) {
-//				calendar = null;
-//			} else {
-//				// 时间用-分割
-//				String[] dates = getDate().split("-");
-//				calendar.set(Integer.parseInt(dates[0]), Integer.parseInt(dates[1]) - 1, Integer.parseInt(dates[2]));
-//			}
-//			this.pageBean = warehouseService.getMaterialOutputList(calendar, this.page, this.rowsPerPage);
-//			setDate("");
-//			return "showMaterialOutputs";
-//		} else {
-//			return "failed";
-//		}
 	}
 
     

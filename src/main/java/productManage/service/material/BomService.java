@@ -1,5 +1,6 @@
 package productManage.service.material;
 
+import java.util.List;
 import java.util.Map;
 
 import productManage.model.lhj.Bom;
@@ -22,5 +23,7 @@ public interface BomService {
 	public void deleteBom(Material m,Design d);
 		
 	public Design getDesignById(String id);
+	
+	public List<Design> getAllDesign();
 	
 }

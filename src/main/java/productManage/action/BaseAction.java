@@ -34,6 +34,7 @@ public class BaseAction extends ActionSupport implements SessionAware,
     }  
   
     public void setServletResponse(HttpServletResponse response) {  
+    	response.setHeader("Access-Control-Allow-Origin", "*"); 
        this.response = response;  
     }
 }

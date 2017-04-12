@@ -72,7 +72,7 @@ Material material = new Material();
 	    String materialCode = "A001";
 	    String materialName = "A001";
 	    String materialType = "A001";
-	    
+	    String colorCode = "";
 	    String colorDescription = "A001";
 	    String materialIngredient = "A001";
 	    float unitPrice = 100;
@@ -80,25 +80,24 @@ Material material = new Material();
 	    float width = 10;
 	    float outputVol = 10;
             
-	    Date modificationDate = new Date();
-            
 
+	    Date modificationDate = new Date();
 
 	    materialCode = request.getParameter("materialCode");
 	    materialName = request.getParameter("materialName");
 	    materialType = request.getParameter("materialType");
-	    
+	    colorCode = request.getParameter("colorCode");
 	    colorDescription = request.getParameter("colorDescription");
 	    materialIngredient = request.getParameter("materialIngredient");
 	    unitPrice = Float.parseFloat(request.getParameter("unitPrice"));
 	    unit = request.getParameter("unit");
 	    width = Float.parseFloat(request.getParameter("width"));
 	    outputVol = Float.parseFloat(request.getParameter("outputVol"));
-	    modificationDate = new Date();
 	    
 	    material.setMaterialCode(materialCode);
 	    material.setMaterialName(materialName);
 	    material.setMaterialType(materialType);
+	    material.setColorCode(colorCode);
 	    material.setColorDescription(colorDescription);
 	    material.setMaterialIngredient(materialIngredient);
 	    material.setUnitPrice(unitPrice);
